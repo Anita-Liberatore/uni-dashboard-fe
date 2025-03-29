@@ -22,3 +22,5 @@ Install dependencies:
 
 ```bash
 npm install
+ng serve
+
