@@ -1,0 +1,17 @@
+/* Utilità per le icone o personalizzazioni extra */
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0f2fe;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .icon-svg {
+    width: 32px;
+    height: 32px;
+    fill: #2563eb;
+  }
+  

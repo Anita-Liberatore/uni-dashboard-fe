@@ -1,0 +1,13 @@
+<div class="border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+      <li *ngFor="let tab of tabs" class="me-2">
+        <button
+          (click)="setActive(tab.key)"
+          [ngClass]="activeTab === tab.key ? activeClass : inactiveClass"
+          class="inline-flex items-center justify-center p-4 rounded-t-lg group">
+          {{ tab.label }}
+        </button>
+      </li>
+    </ul>
+  </div>
+  

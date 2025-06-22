@@ -1,1 +1,12 @@
-<p>custom-card works!</p>
+<div id="card" class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+    [class]="computedLayout">
+
+    <!-- Slot: colonna 1 (es. icona o immagine) -->
+    <ng-content select="[slot-start]"></ng-content>
+
+    <!-- Slot: colonna 2 (contenuto centrale) -->
+    <ng-content select="[slot-middle]"></ng-content>
+
+    <!-- Slot: colonna 3 (azioni o bottoni) -->
+    <ng-content select="[slot-end]"></ng-content>
+</div>
