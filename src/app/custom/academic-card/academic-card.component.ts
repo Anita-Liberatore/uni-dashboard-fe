@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, CardComponent],
   templateUrl: './academic-card.component.html',
   styleUrl: './academic-card.component.css',
+  standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AcademicCardComponent {
