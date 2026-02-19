@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { AcademicCardComponent } from '../../custom/academic-card/academic-card.component';
 import { ProfileTabComponent } from '../../custom/profile-tab/profile-tab.component';
 import { FormatBirthDatePipe } from "../../format-birth-date.pipe";
+import {DocumentsCardComponent} from '../../custom/documents-card/documents-card.component';
+import {TimelineCardComponent} from '../../custom/timeline-card/timeline-card.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CardComponent, CommonModule, AcademicCardComponent, ProfileTabComponent, FormatBirthDatePipe],
+  imports: [CardComponent, CommonModule, AcademicCardComponent, ProfileTabComponent, FormatBirthDatePipe, DocumentsCardComponent, TimelineCardComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -50,7 +52,7 @@ export class ProfileComponent {
       electives: { current: 0, total: 4 },
     }
   };
-  
+
   activeTab: string = 'academic';
 
   activeClass =
@@ -58,4 +60,56 @@ export class ProfileComponent {
   inactiveClass =
     'border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-gray-400 dark:text-gray-500';
 
+  documentsInfo = [
+    {
+      name: 'Certificato di Iscrizione',
+      type: 'PDF',
+      size: '245 KB',
+      date: 'Oct 15, 2023',
+      status: 'Verified'
+    },
+    {
+      name: 'Piano di Studi 2023/24',
+      type: 'PDF',
+      size: '128 KB',
+      date: 'Sep 5, 2023',
+      status: 'Verified'
+    },
+    {
+      name: "Documento d'Identità",
+      type: 'JPG',
+      size: '1.2 MB',
+      date: 'Aug 20, 2023',
+      status: 'Pending'
+    },
+    {
+      name: 'Attestato di Lingua Inglese',
+      type: 'PDF',
+      size: '340 KB',
+      date: 'Jun 12, 2023',
+      status: 'Verified'
+    },
+    {
+      name: 'Ricevuta Tasse A.A. 2023/24',
+      type: 'PDF',
+      size: '89 KB',
+      date: 'Sep 30, 2023',
+      status: 'Verified'
+    }
+  ];
+
+  timelineInfo = [
+    {
+      title: 'Esame superato: Algoritmi e Strutture Dati',
+      description: 'Voto: 30/30 e Lode',
+      date: 'Jan 18, 2024',
+      type: 'success'
+    },
+    {
+      title: 'Borsa di studio assegnata',
+      description: 'Merito accademico — €2.500',
+      date: 'Jul 15, 2023',
+      type: 'award'
+    }
+  ];
 }

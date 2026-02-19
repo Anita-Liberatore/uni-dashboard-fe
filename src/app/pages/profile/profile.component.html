@@ -95,3 +95,11 @@
 <div class="mt-6" *ngIf="activeTab === 'academic'">
   <app-academic-card [academicData]="academicInfo"></app-academic-card>
 </div>
+
+<div class="mt-6" *ngIf="activeTab === 'documents'">
+  <app-documents-card [documentsData]="documentsInfo"></app-documents-card>
+</div>
+
+<div class="mt-6" *ngIf="activeTab === 'timeline'">
+  <app-timeline-card [timelineData]="timelineInfo"></app-timeline-card>
+</div>

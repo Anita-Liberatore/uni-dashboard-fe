@@ -1,0 +1,57 @@
+<app-card [computedLayout]="'flex justify-between items-start gap-4 flex-wrap'">
+
+  <div slot-middle class="flex flex-col flex-1 space-y-6">
+
+    <div class="flex justify-between items-start">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+          Timeline
+        </h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Your academic journey and milestones
+        </p>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-5 top-2 bottom-2 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+
+      <div class="space-y-8">
+        <div *ngFor="let event of timelineData" class="relative flex items-start gap-6">
+
+          <div [ngClass]="{
+            'bg-green-50 dark:bg-green-900/30 text-green-600 border-green-200': event.type === 'success',
+            'bg-blue-50 dark:bg-blue-900/30 text-blue-600 border-blue-200': event.type === 'info',
+            'bg-orange-50 dark:bg-orange-900/30 text-orange-600 border-orange-200': event.type === 'award',
+            'bg-gray-50 dark:bg-gray-800 text-gray-400 border-gray-200': event.type === 'future'
+          }" class="z-10 flex items-center justify-center w-10 h-10 rounded-full border-2 bg-white dark:bg-gray-900 shrink-0">
+
+            <ng-container [ngSwitch]="event.type">
+              <svg *ngSwitchCase="'success'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+              <svg *ngSwitchCase="'info'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <svg *ngSwitchCase="'award'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15l-2 5l2 2l2-2l-2-5zm0 0l2-5l-2-2l-2 2l2 5zm0 0h5l2-2l-2-2h-5m0 4h-5l-2-2l2-2h5"></path></svg>
+              <svg *ngSwitchDefault class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </ng-container>
+          </div>
+
+          <div class="flex flex-1 justify-between items-start pt-1">
+            <div>
+              <p class="text-sm font-bold text-gray-900 dark:text-white">
+                {{ event.title }}
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                {{ event.description }}
+              </p>
+            </div>
+
+            <span class="text-xs font-medium text-gray-400 dark:text-gray-500 whitespace-nowrap ml-4">
+              {{ event.date }}
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</app-card>

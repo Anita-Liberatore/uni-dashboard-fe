@@ -1,0 +1,129 @@
+<app-card [computedLayout]="'flex justify-between items-start gap-4 flex-wrap'">
+
+  <!-- slot-middle -->
+  <div slot-middle class="flex flex-col flex-1 space-y-6">
+
+    <!-- Header -->
+    <div class="flex justify-between items-start">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+          Documents
+        </h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Your uploaded documents and certificates
+        </p>
+      </div>
+
+      <button
+        class="inline-flex items-center gap-2 px-3 py-1.5
+         text-sm font-medium
+         text-gray-700 bg-white
+         border border-gray-300 rounded-md shadow-sm
+         hover:bg-gray-100
+         dark:bg-gray-700 dark:text-white
+         dark:border-gray-600 dark:hover:bg-gray-600">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4">
+
+          <!-- Freccia su -->
+          <path d="M12 16V4" />
+          <polyline points="8 8 12 4 16 8" />
+          <!-- Base -->
+          <path d="M20 16v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4" />
+        </svg>
+
+        Upload
+      </button>
+
+    </div>
+
+    <!-- Documents list -->
+    <div class="divide-y divide-gray-200 dark:divide-gray-700">
+
+      <div
+        *ngFor="let doc of documentsData"
+        class="flex items-center justify-between py-4">
+
+        <!-- Left -->
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center justify-center w-10 h-10 rounded-lg
+         bg-blue-50 dark:bg-blue-900">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5 text-blue-600 dark:text-blue-300">
+
+              <!-- Documento -->
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <!-- Angolo piegato -->
+              <polyline points="14 2 14 8 20 8" />
+              <!-- Righe -->
+              <line x1="8" y1="13" x2="16" y2="13" />
+              <line x1="8" y1="17" x2="16" y2="17" />
+            </svg>
+          </div>
+
+
+          <div>
+            <p class="text-sm font-semibold text-gray-900 dark:text-white">
+              {{ doc.name }}
+            </p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              {{ doc.type }} · {{ doc.size }} · {{ doc.date }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center gap-4">
+
+          <!-- Status -->
+          <span
+            class="px-2 py-0.5 text-xs font-semibold rounded-full"
+            [ngClass]="{
+              'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300': doc.status === 'Verified',
+              'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300': doc.status === 'Pending'
+            }">
+            {{ doc.status }}
+          </span>
+
+          <!-- Actions -->
+          <button
+            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-4 h-4 fill-current">
+              <path
+                d="M572.5 241.4C518.6 135.5 407.8 64 288 64S57.4 135.5 3.5 241.4a48.1 48.1 0 0 0 0 29.2C57.4 376.5 168.2 448 288 448s230.6-71.5 284.5-177.4a48.1 48.1 0 0 0 0-29.2zM288 400c-88.4 0-160-71.6-160-160S199.6 80 288 80s160 71.6 160 160-71.6 160-160 160zm0-272a112 112 0 1 0 0 224 112 112 0 1 0 0-224z" />
+            </svg>
+          </button>
+
+          <button
+            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
+              <path
+                d="M480 352h-96v32h64v64H64v-64h64v-32H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32zM256 0c-17.7 0-32 14.3-32 32v256l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 288V32c0-17.7-14.3-32-32-32z" />
+            </svg>
+          </button>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</app-card>
