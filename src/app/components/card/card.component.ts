@@ -10,14 +10,14 @@ import { CommonModule } from '@angular/common';
 })
 export class CardComponent {
 
- 
   @Input() layout: 'horizontal' | 'vertical' = 'horizontal';
+  @Input() customLayout: string = '';
 
   get computedLayout(): string {
+    if (this.customLayout) return this.customLayout;
     return this.layout === 'vertical'
       ? 'flex flex-col text-center space-y-6'
       : 'flex flex-col sm:flex-row items-center justify-between space-y-6 sm:space-y-0 sm:space-x-6 rtl:space-x-reverse text-center sm:text-left';
   }
-  
 
 }
