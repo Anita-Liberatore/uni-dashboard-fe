@@ -1,0 +1,93 @@
+<!-- Header -->
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-slate-900">Piano di studi</h1>
+  <p class="text-sm text-slate-500 mt-1">Triennale in Ingegneria Informatica · 180 CFU totali</p>
+</div>
+
+<!-- Anno cards -->
+<div class="space-y-6">
+  <div *ngFor="let anno of piano; let i = index"
+       class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+
+    <!-- Anno header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-bold px-2.5 py-1 rounded-lg" [ngClass]="annoLightColor(i)">
+          Anno {{ anno.anno }}
+        </span>
+        <span class="text-sm text-slate-500">
+          {{ corsiSuperati(anno) }}/{{ anno.corsi.length }} corsi superati
+          · {{ cfuSuperatiAnno(anno) }}/{{ cfuAnno(anno) }} CFU
+        </span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-32 bg-slate-100 rounded-full h-1.5">
+          <div class="h-1.5 rounded-full transition-all" [ngClass]="annoBarColor(i)"
+               [style.width.%]="progressAnno(anno)"></div>
+        </div>
+        <span class="text-xs font-semibold text-slate-500 w-8 text-right">{{ progressAnno(anno) }}%</span>
+      </div>
+    </div>
+
+    <!-- Corsi grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-slate-50">
+
+      <!-- Semestre 1 -->
+      <div class="p-5">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Semestre 1</p>
+        <div class="space-y-2">
+          <div *ngFor="let c of anno.corsi | slice:0:3"
+               class="flex items-center justify-between gap-3 py-2 px-3 rounded-lg"
+               [ngClass]="c.superato ? 'bg-slate-50' : 'bg-white border border-slate-100'">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-1.5 h-1.5 rounded-full shrink-0"
+                   [ngClass]="c.superato ? 'bg-emerald-400' : 'bg-slate-300'"></div>
+              <p class="text-sm text-slate-700 truncate">{{ c.nome }}</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-xs text-slate-400">{{ c.cfu }} CFU</span>
+              <span *ngIf="c.superato && c.voto"
+                    class="text-xs font-bold px-1.5 py-0.5 rounded"
+                    [ngClass]="gradeColor(c.voto)">
+                {{ c.voto }}<span *ngIf="c.lode">L</span>
+              </span>
+              <span *ngIf="!c.superato"
+                    class="text-xs text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">
+                —
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semestre 2 -->
+      <div class="p-5">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Semestre 2</p>
+        <div class="space-y-2">
+          <div *ngFor="let c of anno.corsi | slice:3:6"
+               class="flex items-center justify-between gap-3 py-2 px-3 rounded-lg"
+               [ngClass]="c.superato ? 'bg-slate-50' : 'bg-white border border-slate-100'">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-1.5 h-1.5 rounded-full shrink-0"
+                   [ngClass]="c.superato ? 'bg-emerald-400' : 'bg-slate-300'"></div>
+              <p class="text-sm text-slate-700 truncate">{{ c.nome }}</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-xs text-slate-400">{{ c.cfu }} CFU</span>
+              <span *ngIf="c.superato && c.voto"
+                    class="text-xs font-bold px-1.5 py-0.5 rounded"
+                    [ngClass]="gradeColor(c.voto)">
+                {{ c.voto }}<span *ngIf="c.lode">L</span>
+              </span>
+              <span *ngIf="!c.superato"
+                    class="text-xs text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">
+                —
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

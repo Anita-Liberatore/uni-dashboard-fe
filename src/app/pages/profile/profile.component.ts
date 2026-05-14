@@ -1,115 +1,64 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CardComponent } from "../../components/card/card.component";
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AcademicCardComponent } from '../../custom/academic-card/academic-card.component';
-import { ProfileTabComponent } from '../../custom/profile-tab/profile-tab.component';
-import { FormatBirthDatePipe } from "../../format-birth-date.pipe";
-import {DocumentsCardComponent} from '../../custom/documents-card/documents-card.component';
-import {TimelineCardComponent} from '../../custom/timeline-card/timeline-card.component';
+import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CardComponent, CommonModule, AcademicCardComponent, ProfileTabComponent, FormatBirthDatePipe, DocumentsCardComponent, TimelineCardComponent],
+  imports: [CommonModule, FormatBirthDatePipe],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+
+  activeTab = 'info';
+
+  tabs = [
+    { key: 'info',      label: 'Dati personali' },
+    { key: 'academic',  label: 'Carriera' },
+    { key: 'documents', label: 'Documenti' },
+  ];
 
   student = {
     name: 'Anita',
     surname: 'Liberatore',
-    universityArea: 'Computer Science',
+    universityArea: 'Ingegneria Informatica',
     studentId: 'S1234567',
-    email: 'anita.liberatore@example.com',
-    address: 'Via Roma 123, Torino',
+    email: 'anita.liberatore@studenti.unito.it',
+    pec: 'anita.liberatore@pec.unito.it',
+    address: 'Via Roma 123, 10100 Torino (TO)',
     phone: '+39 320 123 4567',
     birthDate: '1998-04-22',
-    enrollmentStatus: 'ACTIVE'
+    birthPlace: 'Napoli (NA)',
+    codiceFiscale: 'LBRANT98D62F839X',
+    enrollmentStatus: 'ACTIVE',
+    anno: 3,
+    semestre: 1,
+    enrolled: '1 Set 2021',
+    graduationDate: 'Giu 2025',
+    advisor: 'Prof.ssa Laura Bianchi',
   };
 
-  academicInfo = {
-    programDetails: {
-      program: 'Computer Science',
-      degree: 'Bachelor of Science',
-      faculty: 'Faculty of Science and Technology',
-      department: 'Department of Computer Science',
-    },
-    enrollmentStatus: {
-      year: 3,
-      semester: 1,
-      status: 'Active',
-    },
-    datesAndAdvisor: {
-      enrolled: 'Sep 1, 2021',
-      graduation: 'Jun 30, 2024',
-      advisor: 'Prof. Laura Bianchi',
-    },
-    requirements: {
-      credits: { current: 53, total: 180 },
-      courses: { current: 6, total: 22 },
-      electives: { current: 0, total: 4 },
-    }
+  academic = {
+    program: 'Ingegneria Informatica',
+    degree: 'Laurea Triennale (L-8)',
+    faculty: 'Facoltà di Scienze e Tecnologia',
+    department: 'Dipartimento di Informatica',
+    credits: { current: 53, total: 180 },
+    courses: { current: 6, total: 22 },
+    electives: { current: 0, total: 4 },
+    media: 29.8,
   };
 
-  activeTab: string = 'academic';
-
-  activeClass =
-    'text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500';
-  inactiveClass =
-    'border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-gray-400 dark:text-gray-500';
-
-  documentsInfo = [
-    {
-      name: 'Certificato di Iscrizione',
-      type: 'PDF',
-      size: '245 KB',
-      date: 'Oct 15, 2023',
-      status: 'Verified'
-    },
-    {
-      name: 'Piano di Studi 2023/24',
-      type: 'PDF',
-      size: '128 KB',
-      date: 'Sep 5, 2023',
-      status: 'Verified'
-    },
-    {
-      name: "Documento d'Identità",
-      type: 'JPG',
-      size: '1.2 MB',
-      date: 'Aug 20, 2023',
-      status: 'Pending'
-    },
-    {
-      name: 'Attestato di Lingua Inglese',
-      type: 'PDF',
-      size: '340 KB',
-      date: 'Jun 12, 2023',
-      status: 'Verified'
-    },
-    {
-      name: 'Ricevuta Tasse A.A. 2023/24',
-      type: 'PDF',
-      size: '89 KB',
-      date: 'Sep 30, 2023',
-      status: 'Verified'
-    }
+  documents = [
+    { name: 'Certificato di Iscrizione',   type: 'PDF', size: '245 KB', date: '15 Ott 2023', status: 'Verified' },
+    { name: 'Piano di Studi 2023/24',       type: 'PDF', size: '128 KB', date: '5 Set 2023',  status: 'Verified' },
+    { name: "Documento d'Identità",         type: 'JPG', size: '1.2 MB', date: '20 Ago 2023', status: 'Pending'  },
+    { name: 'Attestato Lingua Inglese B2',  type: 'PDF', size: '340 KB', date: '12 Giu 2023', status: 'Verified' },
+    { name: 'Ricevuta Tasse A.A. 2023/24',  type: 'PDF', size: '89 KB',  date: '30 Set 2023', status: 'Verified' },
   ];
 
-  timelineInfo = [
-    {
-      title: 'Esame superato: Algoritmi e Strutture Dati',
-      description: 'Voto: 30/30 e Lode',
-      date: 'Jan 18, 2024',
-      type: 'success'
-    },
-    {
-      title: 'Borsa di studio assegnata',
-      description: 'Merito accademico — €2.500',
-      date: 'Jul 15, 2023',
-      type: 'award'
-    }
-  ];
+  progressWidth(current: number, total: number): string {
+    return `${Math.round((current / total) * 100)}%`;
+  }
 }

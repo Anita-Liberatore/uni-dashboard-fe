@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from '../../components/card/card.component';
-import { TimelineCardComponent } from '../../custom/timeline-card/timeline-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule, CommonModule, CardComponent, TimelineCardComponent],
+  imports: [RouterModule, CommonModule],
   templateUrl: './home.component.html',
   standalone: true,
   styleUrl: './home.component.css'
@@ -16,73 +14,37 @@ export class HomeComponent {
   student = {
     name: 'Anita',
     surname: 'Liberatore',
-    universityArea: 'Computer Science',
-    studentId: 'S1234567',
-    enrollmentStatus: 'ACTIVE'
+    area: 'Ingegneria Informatica',
+    anno: 3,
+    semestre: 1,
+    matricola: 'S1234567',
+    graduationDate: 'Giu 2025'
   };
 
   stats = [
-    {
-      label: 'Credits Earned',
-      value: '53',
-      total: '180',
-      icon: 'credits',
-      color: 'blue'
-    },
-    {
-      label: 'Courses Completed',
-      value: '6',
-      total: '22',
-      icon: 'courses',
-      color: 'green'
-    },
-    {
-      label: 'Current Year',
-      value: '3',
-      total: null,
-      icon: 'year',
-      color: 'purple'
-    },
-    {
-      label: 'GPA',
-      value: '29.8',
-      total: '30',
-      icon: 'gpa',
-      color: 'orange'
-    }
+    { label: 'Media voti', value: '29.8', sub: 'su 30', color: 'indigo', trend: '+0.3 ultimo semestre' },
+    { label: 'CFU acquisiti', value: '53', sub: 'su 180', color: 'emerald', trend: '29% completato' },
+    { label: 'Esami superati', value: '6', sub: 'su 22', color: 'sky', trend: '4 con lode' },
+    { label: 'Esami da dare', value: '16', sub: 'rimanenti', color: 'amber', trend: 'Prossimo: Mag 2024' }
   ];
 
-  recentActivity = [
-    {
-      title: 'Esame superato: Algoritmi e Strutture Dati',
-      description: 'Voto: 30/30 e Lode',
-      date: 'Jan 18, 2024',
-      type: 'success'
-    },
-    {
-      title: 'Borsa di studio assegnata',
-      description: 'Merito accademico — €2.500',
-      date: 'Jul 15, 2023',
-      type: 'award'
-    },
-    {
-      title: 'Esame superato: Basi di Dati',
-      description: 'Voto: 28/30',
-      date: 'Jun 20, 2023',
-      type: 'success'
-    },
-    {
-      title: 'Piano di Studi approvato',
-      description: 'Anno accademico 2023/24',
-      date: 'Sep 5, 2023',
-      type: 'info'
-    }
+  recentExams = [
+    { corso: 'Algoritmi e Strutture Dati', data: '18 Gen 2024', voto: 30, lode: true, cfu: 9 },
+    { corso: 'Basi di Dati', data: '20 Giu 2023', voto: 28, lode: false, cfu: 9 },
+    { corso: 'Programmazione II', data: '15 Feb 2023', voto: 30, lode: true, cfu: 9 },
+    { corso: 'Reti di Calcolatori', data: '12 Gen 2023', voto: 27, lode: false, cfu: 6 },
   ];
 
-  upcomingDeadlines = [
-    { label: 'Iscrizione esame: Sistemi Operativi', date: 'May 20, 2024', urgent: true },
-    { label: 'Pagamento tasse II rata', date: 'Jun 1, 2024', urgent: true },
-    { label: 'Scadenza piano di studi 2024/25', date: 'Jul 15, 2024', urgent: false },
-    { label: 'Sessione estiva esami', date: 'Jun 10 – Jul 31, 2024', urgent: false }
+  upcomingExams = [
+    { corso: 'Sistemi Operativi', data: '28 Mag 2024', cfu: 9, urgent: true },
+    { corso: 'Ingegneria del Software', data: '15 Giu 2024', cfu: 9, urgent: false },
+    { corso: 'Intelligenza Artificiale', data: '10 Lug 2024', cfu: 6, urgent: false },
   ];
+
+  gradeColor(voto: number): string {
+    if (voto === 30) return 'text-emerald-600 bg-emerald-50';
+    if (voto >= 27) return 'text-sky-600 bg-sky-50';
+    if (voto >= 24) return 'text-amber-600 bg-amber-50';
+    return 'text-red-600 bg-red-50';
+  }
 }
