@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { StatCardComponent } from '../../components/stat-card/stat-card.component';
 import { SectionCardComponent } from '../../components/section-card/section-card.component';
-import { ExamsTableComponent } from '../../components/exams-table/exams-table.component';
+import { ExamsTableComponent } from '../../custom/exams-table/exams-table.component';
 import { Exam } from '../../models/exam.model';
 
 @Component({

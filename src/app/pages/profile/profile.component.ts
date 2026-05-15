@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
-import { ProfileHeroComponent } from '../../components/profile-hero/profile-hero.component';
+import { ProfileHeroComponent } from '../../custom/profile-hero/profile-hero.component';
 import { PillTabsComponent, Tab } from '../../components/pill-tabs/pill-tabs.component';
 import { SectionCardComponent } from '../../components/section-card/section-card.component';
 import { ProgressItemComponent } from '../../components/progress-item/progress-item.component';
-import { DocumentRowComponent } from '../../components/document-row/document-row.component';
-import { UploadModalComponent } from '../../components/upload-modal/upload-modal.component';
+import { DocumentRowComponent } from '../../custom/document-row/document-row.component';
+import { UploadModalComponent } from '../../custom/upload-modal/upload-modal.component';
 import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
 import { Student, AcademicRecord } from '../../models/student.model';
 import { StudentDocument } from '../../models/document.model';

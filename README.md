@@ -1,78 +1,180 @@
 # UniDashboard FE
 
-UniDashboard FE is a modern university dashboard built with Angular, designed to provide an intuitive overview and advanced features for students and administrators. The project implements reusable components, student profile management, academic data visualization, and supports server-side rendering (SSR).
-
-## Main Features
-- **Student Dashboard**: View personal, academic, and document data
-- **Profile Management**: Edit and view student details
-- **Reusable Components**: Card, Tab, Navbar, and more
-- **SSR Support**: Server-side rendering for performance and SEO
-- **Modern UI**: TailwindCSS for responsive design and dark mode
-
-## Quick Start
-1. **Clone the repository**
-   ```bash
-   git clone <repo-url>
-   cd uni-dashboard-fe
-   ```
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-3. **Start the development server**
-   ```bash
-   npm start
-   # or
-   ng serve
-   ```
-   The app will be available at [http://localhost:4200](http://localhost:4200)
-
-4. **Production build**
-   ```bash
-   ng build
-   ```
-   Artifacts will be in `dist/uni-dashboard-fe/`
-
-5. **SSR (Server Side Rendering)**
-   ```bash
-   npm run serve:ssr:uni-dashboard-fe
-   ```
-
-## Running Tests
-- **Unit tests**: `ng test`
-- **End-to-end**: `ng e2e` (configure your preferred e2e framework)
-
-## Main Folder Structure
-```
-src/
-  app/
-    components/        # Reusable UI components (card, navbar, tab)
-    custom/            # Custom components (academic-card, profile-tab)
-    models/            # TypeScript models (e.g., student.model.ts)
-    pages/             # Main pages (home, profile)
-  public/              # Public assets
-  styles.css           # Global styles (TailwindCSS)
-```
-
-## Main Dependencies
-- **Angular** ^19.2.x
-- **TailwindCSS** ^4.x
-- **Express** ^4.x (for SSR)
-- **RxJS**, **zone.js**, **PostCSS**
-- **Karma/Jasmine** (testing)
-
-## Contribution Guidelines
-- Use branch naming convention: `feature/<name>`, `fix/<name>`, `chore/<name>`
-- Open a Pull Request with a clear description of your changes
-- Follow consistent code style (Angular Style Guide)
-- Write tests for new features
-
-## Useful Resources
-- [Angular CLI Docs](https://angular.dev/tools/cli)
-- [TailwindCSS Docs](https://tailwindcss.com/docs)
-
-## License
-This project is licensed under the MIT License.
+A modern, fully responsive university student dashboard built with **Angular 19** and **Tailwind CSS v4**. Students can track their academic progress, browse their study plan, review passed exams and manage personal documents — all from a clean, single-page interface with an animated sidebar.
 
 ---
-For questions or support, contact the project maintainer.
+
+## Screenshots
+
+### Dashboard — Home
+![Dashboard home page showing stat cards and recent/upcoming exams](docs/screenshots/home.png)
+
+### Exams passed
+![Exams page with grade table, average and credit counters](docs/screenshots/exams.png)
+
+### Study Plan
+![Study plan broken down by year and semester with progress bars](docs/screenshots/study-plan.png)
+
+### Profile
+![Profile page with personal info, academic record and document list](docs/screenshots/profile.png)
+
+> **How to add screenshots:** run `npm start`, open `http://localhost:4200` in your browser and take a screenshot of each page. Save them as `docs/screenshots/home.png`, `exams.png`, `study-plan.png`, `profile.png`.
+
+---
+
+## Pages
+
+| Route | Page | Description |
+|---|---|---|
+| `/` | **Dashboard** | Stat cards (GPA, credits, exams), recent results, upcoming exams |
+| `/exams` | **Exams passed** | Full grade table with color-coded badges, average, honour count |
+| `/study-plan` | **Study plan** | 3-year curriculum split by semester, pass/fail indicators |
+| `/profile` | **Profile** | Personal info, academic record, documents, upload modal |
+
+---
+
+## Project structure
+
+```
+src/app/
+│
+├── components/          # Generic, reusable UI primitives
+│   ├── sidebar/         # App navigation (fixed left rail)
+│   ├── page-header/     # Page title + subtitle strip
+│   ├── stat-card/       # KPI card with icon slot, progress bar, badge
+│   ├── section-card/    # Titled content card with optional action slot
+│   ├── pill-tabs/       # Pill-style tab switcher
+│   ├── progress-item/   # Labelled progress bar row
+│   └── grade-badge/     # Colour-coded grade pill (18–30L range)
+│
+├── custom/              # Domain-specific feature components
+│   ├── profile-hero/    # Student avatar, name, quick-stat strip
+│   ├── exams-table/     # Exam results table (uses grade-badge)
+│   ├── year-plan-card/  # Single-year study plan card (uses grade-badge)
+│   ├── document-row/    # Document list row with status badge
+│   └── upload-modal/    # Drag-and-drop upload modal with progress
+│
+├── pages/               # Thin page orchestrators (data + layout only)
+│   ├── home/
+│   ├── exams/
+│   ├── study-plan/
+│   └── profile/
+│
+├── models/              # Shared TypeScript interfaces
+│   ├── student.model.ts
+│   ├── exam.model.ts
+│   ├── course.model.ts
+│   └── document.model.ts
+│
+├── app.routes.ts        # Route definitions
+└── app.component.html   # Root shell (sidebar + router-outlet)
+```
+
+### Design principle
+
+```
+components/   ←  zero domain knowledge, zero model imports
+                 (card, tab, progress bar …)
+
+custom/       ←  use components/ + import models/
+                 (exam table, upload modal …)
+
+pages/        ←  use components/ + custom/, hold data & logic
+```
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Angular 19 (standalone components, SSR) |
+| Styling | Tailwind CSS v4 (`@import "tailwindcss"`) |
+| Icons | Heroicons 2.0 outline SVGs (inline) |
+| Routing | Angular Router with `routerLinkActive` |
+| Forms | `FormsModule` + `ngModel` |
+| Server-side rendering | `@angular/ssr` + Express 4 |
+| Testing | Karma + Jasmine |
+
+---
+
+## Quick start
+
+```bash
+# 1. Clone
+git clone https://github.com/Anita-Liberatore/uni-dashboard-fe.git
+cd uni-dashboard-fe
+
+# 2. Install
+npm install
+
+# 3. Dev server  →  http://localhost:4200
+npm start
+
+# 4. Production build
+npm run build
+# Output: dist/uni-dashboard-fe/
+
+# 5. SSR preview
+npm run serve:ssr:uni-dashboard-fe
+```
+
+---
+
+## Key component APIs
+
+### `<app-stat-card>`
+```html
+<app-stat-card value="29.8" label="GPA" suffix="/30"
+               badge="+0.3" badgeClass="text-emerald-600 bg-emerald-50"
+               [progress]="66" progressClass="bg-indigo-500">
+  <svg slot-icon …></svg>   <!-- projected icon -->
+</app-stat-card>
+```
+
+### `<app-section-card>`
+```html
+<app-section-card title="Documents" [scrollableX]="true">
+  <button slot-action …>Upload</button>   <!-- header right slot -->
+  <!-- body content projected here -->
+</app-section-card>
+```
+
+### `<app-upload-modal>`
+```html
+<app-upload-modal
+  [isOpen]="uploadModalOpen"
+  (closed)="uploadModalOpen = false"
+  (uploaded)="onDocumentsUploaded($event)">
+</app-upload-modal>
+```
+Emits `StudentDocument[]` on successful upload. Supports drag-and-drop, per-file progress bars, Escape key, and backdrop click to close.
+
+### `<app-grade-badge>`
+```html
+<app-grade-badge [grade]="30" [lode]="true"></app-grade-badge>
+<!-- renders "30L" in an emerald pill -->
+```
+
+---
+
+## Contributing
+
+- Branch naming: `feature/<name>`, `fix/<name>`, `chore/<name>`
+- All source comments and commit messages in **English**
+- Follow Angular Style Guide (one component per file, `OnPush` where possible)
+- Open a pull request with a clear description before merging
+
+---
+
+## Useful links
+
+- [Angular CLI docs](https://angular.dev/tools/cli)
+- [Tailwind CSS v4 docs](https://tailwindcss.com/docs)
+- [Heroicons](https://heroicons.com)
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.

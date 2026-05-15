@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
-import { YearPlanCardComponent } from '../../components/year-plan-card/year-plan-card.component';
+import { YearPlanCardComponent } from '../../custom/year-plan-card/year-plan-card.component';
 import { YearPlan } from '../../models/course.model';
 
 @Component({

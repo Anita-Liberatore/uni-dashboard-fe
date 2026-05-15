@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { StatCardComponent } from '../../components/stat-card/stat-card.component';
 import { SectionCardComponent } from '../../components/section-card/section-card.component';
-import { GradeBadgeComponent } from '../../components/grade-badge/grade-badge.component';
 import { Exam } from '../../models/exam.model';
 
 interface UpcomingExam {
@@ -23,7 +22,6 @@ interface UpcomingExam {
     PageHeaderComponent,
     StatCardComponent,
     SectionCardComponent,
-    GradeBadgeComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

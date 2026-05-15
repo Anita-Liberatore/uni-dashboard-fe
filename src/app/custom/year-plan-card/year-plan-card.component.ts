@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GradeBadgeComponent } from '../grade-badge/grade-badge.component';
+import { GradeBadgeComponent } from '../../components/grade-badge/grade-badge.component';
 import { YearPlan, Course } from '../../models/course.model';
 
 @Component({
