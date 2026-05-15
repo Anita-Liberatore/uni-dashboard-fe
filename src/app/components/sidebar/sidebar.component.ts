@@ -18,7 +18,6 @@ export class SidebarComponent {
   /** Logged-in student shown in the footer */
   readonly student = {
     name: 'Anita Liberatore',
-    initials: 'AL',
     id: 'S1234567',
   };
 
