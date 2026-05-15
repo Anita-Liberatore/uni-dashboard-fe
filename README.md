@@ -9,17 +9,6 @@ A modern, fully responsive university student dashboard built with **Angular 19*
 ### Dashboard — Home
 ![Dashboard home page showing stat cards and recent/upcoming exams](docs/screenshots/home.png)
 
-### Exams passed
-![Exams page with grade table, average and credit counters](docs/screenshots/exams.png)
-
-### Study Plan
-![Study plan broken down by year and semester with progress bars](docs/screenshots/study-plan.png)
-
-### Profile
-![Profile page with personal info, academic record and document list](docs/screenshots/profile.png)
-
-> **How to add screenshots:** run `npm start`, open `http://localhost:4200` in your browser and take a screenshot of each page. Save them as `docs/screenshots/home.png`, `exams.png`, `study-plan.png`, `profile.png`.
-
 ---
 
 ## Pages
