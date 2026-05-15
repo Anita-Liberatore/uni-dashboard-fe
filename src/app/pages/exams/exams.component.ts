@@ -1,23 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { StatCardComponent } from '../../components/stat-card/stat-card.component';
-import { GradeBadgeComponent } from '../../components/grade-badge/grade-badge.component';
-
-interface Exam {
-  course: string;
-  area: string;
-  date: string;
-  grade: number;
-  lode: boolean;
-  credits: number;
-  year: number;
-}
+import { SectionCardComponent } from '../../components/section-card/section-card.component';
+import { ExamsTableComponent } from '../../components/exams-table/exams-table.component';
+import { Exam } from '../../models/exam.model';
 
 @Component({
   selector: 'app-exams',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent, StatCardComponent, GradeBadgeComponent],
+  imports: [PageHeaderComponent, StatCardComponent, SectionCardComponent, ExamsTableComponent],
   templateUrl: './exams.component.html',
   styleUrl: './exams.component.css'
 })
@@ -42,13 +33,5 @@ export class ExamsComponent {
 
   get honorCount(): number {
     return this.exams.filter(e => e.lode).length;
-  }
-
-  /** Returns the progress-bar fill class matching a grade range */
-  gradeBarClass(grade: number): string {
-    if (grade === 30) return 'bg-emerald-500';
-    if (grade >= 27)  return 'bg-sky-500';
-    if (grade >= 24)  return 'bg-amber-500';
-    return 'bg-red-400';
   }
 }

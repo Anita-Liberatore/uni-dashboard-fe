@@ -1,22 +1,28 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { ProfileHeroComponent } from '../../components/profile-hero/profile-hero.component';
+import { PillTabsComponent, Tab } from '../../components/pill-tabs/pill-tabs.component';
+import { SectionCardComponent } from '../../components/section-card/section-card.component';
+import { ProgressItemComponent } from '../../components/progress-item/progress-item.component';
+import { DocumentRowComponent } from '../../components/document-row/document-row.component';
 import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
-
-interface Tab { key: string; label: string; }
-
-interface Document {
-  name: string;
-  type: string;
-  size: string;
-  date: string;
-  status: 'Verified' | 'Pending';
-}
+import { Student, AcademicRecord } from '../../models/student.model';
+import { StudentDocument } from '../../models/document.model';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent, FormatBirthDatePipe],
+  imports: [
+    CommonModule,
+    PageHeaderComponent,
+    ProfileHeroComponent,
+    PillTabsComponent,
+    SectionCardComponent,
+    ProgressItemComponent,
+    DocumentRowComponent,
+    FormatBirthDatePipe
+  ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -25,12 +31,12 @@ export class ProfileComponent {
   activeTab = 'info';
 
   tabs: Tab[] = [
-    { key: 'info',      label: 'Personal info' },
-    { key: 'academic',  label: 'Academic record' },
-    { key: 'documents', label: 'Documents' },
+    { key: 'info',      label: 'Personal info'    },
+    { key: 'academic',  label: 'Academic record'  },
+    { key: 'documents', label: 'Documents'        },
   ];
 
-  student = {
+  student: Student = {
     name: 'Anita',
     surname: 'Liberatore',
     area: 'Computer Engineering',
@@ -50,7 +56,7 @@ export class ProfileComponent {
     advisor: 'Prof. Laura Bianchi',
   };
 
-  academic = {
+  academic: AcademicRecord = {
     program: 'Computer Engineering',
     degree: 'Bachelor of Science (L-8)',
     faculty: 'Faculty of Science & Technology',
@@ -60,16 +66,11 @@ export class ProfileComponent {
     gpa: 29.8,
   };
 
-  documents: Document[] = [
+  documents: StudentDocument[] = [
     { name: 'Enrollment Certificate',       type: 'PDF', size: '245 KB', date: 'Oct 15, 2023', status: 'Verified' },
     { name: 'Study Plan 2023/24',           type: 'PDF', size: '128 KB', date: 'Sep 5, 2023',  status: 'Verified' },
     { name: 'Identity Document',            type: 'JPG', size: '1.2 MB', date: 'Aug 20, 2023', status: 'Pending'  },
     { name: 'English Certificate B2',       type: 'PDF', size: '340 KB', date: 'Jun 12, 2023', status: 'Verified' },
     { name: 'Tuition Receipt A.Y. 2023/24', type: 'PDF', size: '89 KB',  date: 'Sep 30, 2023', status: 'Verified' },
   ];
-
-  /** Width string for a CSS progress bar */
-  progressWidth(current: number, total: number): string {
-    return `${Math.round((current / total) * 100)}%`;
-  }
 }
