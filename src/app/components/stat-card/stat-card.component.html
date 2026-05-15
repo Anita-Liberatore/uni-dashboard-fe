@@ -1,0 +1,31 @@
+<div class="bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+
+  <!-- Icon + badge row -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="w-10 h-10 rounded-lg flex items-center justify-center" [ngClass]="iconBg">
+      <!-- Icon is projected from the parent -->
+      <ng-content select="[slot-icon]"></ng-content>
+    </div>
+    <span *ngIf="badge" class="text-xs px-2 py-0.5 rounded-full font-medium" [ngClass]="badgeClass">
+      {{ badge }}
+    </span>
+  </div>
+
+  <!-- Value -->
+  <p class="text-2xl font-bold text-slate-900">
+    {{ value }}
+    <span *ngIf="suffix" class="text-sm font-normal text-slate-400">{{ suffix }}</span>
+  </p>
+
+  <!-- Label -->
+  <p class="text-sm text-slate-500 mt-0.5">{{ label }}</p>
+
+  <!-- Optional progress bar -->
+  <div *ngIf="progress !== null" class="mt-3 w-full bg-slate-100 rounded-full h-1.5">
+    <div class="h-1.5 rounded-full" [ngClass]="progressClass" [style.width.%]="progress"></div>
+  </div>
+
+  <!-- Optional note -->
+  <p *ngIf="note" class="mt-2 text-xs font-medium" [ngClass]="noteClass">{{ note }}</p>
+
+</div>

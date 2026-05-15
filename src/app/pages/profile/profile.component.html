@@ -1,135 +1,137 @@
-<!-- Header -->
-<div class="mb-8">
-  <h1 class="text-2xl font-bold text-slate-900">Profilo studente</h1>
-  <p class="text-sm text-slate-500 mt-1">Dati anagrafici, carriera e documenti</p>
-</div>
+<app-page-header
+  title="Student profile"
+  subtitle="Personal data, academic record and documents">
+</app-page-header>
 
-<!-- Profile hero card -->
+<!-- Hero card: avatar + quick stats -->
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mb-6">
   <div class="flex items-center gap-5">
-    <!-- Avatar -->
     <div class="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-xl font-bold shrink-0">
       AL
     </div>
-    <!-- Info -->
     <div class="flex-1 min-w-0">
       <div class="flex items-center gap-3 flex-wrap">
         <h2 class="text-xl font-bold text-slate-900">{{ student.name }} {{ student.surname }}</h2>
-        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Iscritto</span>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Enrolled</span>
       </div>
-      <p class="text-sm text-slate-500 mt-0.5">{{ student.universityArea }} · Anno {{ student.anno }} · {{ student.studentId }}</p>
+      <p class="text-sm text-slate-500 mt-0.5">
+        {{ student.area }} · Year {{ student.year }} · {{ student.studentId }}
+      </p>
     </div>
-    <!-- Quick stats -->
+    <!-- Quick stats row -->
     <div class="hidden md:flex items-center gap-6 shrink-0">
       <div class="text-center">
-        <p class="text-xl font-bold text-slate-900">29.8</p>
-        <p class="text-xs text-slate-400">Media</p>
+        <p class="text-xl font-bold text-slate-900">{{ academic.gpa }}</p>
+        <p class="text-xs text-slate-400">Avg grade</p>
       </div>
       <div class="w-px h-8 bg-slate-100"></div>
       <div class="text-center">
-        <p class="text-xl font-bold text-slate-900">53</p>
-        <p class="text-xs text-slate-400">CFU</p>
+        <p class="text-xl font-bold text-slate-900">{{ academic.credits.current }}</p>
+        <p class="text-xs text-slate-400">Credits</p>
       </div>
       <div class="w-px h-8 bg-slate-100"></div>
       <div class="text-center">
-        <p class="text-xl font-bold text-slate-900">6</p>
-        <p class="text-xs text-slate-400">Esami</p>
+        <p class="text-xl font-bold text-slate-900">{{ academic.courses.current }}</p>
+        <p class="text-xs text-slate-400">Exams</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Tabs -->
+<!-- Pill tabs -->
 <div class="flex gap-1 mb-6 bg-slate-100 p-1 rounded-lg w-fit">
   <button *ngFor="let t of tabs"
-    (click)="activeTab = t.key"
-    class="px-4 py-2 rounded-md text-sm font-medium transition-all"
-    [ngClass]="activeTab === t.key
-      ? 'bg-white text-slate-900 shadow-sm'
-      : 'text-slate-500 hover:text-slate-700'">
+          (click)="activeTab = t.key"
+          class="px-4 py-2 rounded-md text-sm font-medium transition-all"
+          [ngClass]="activeTab === t.key
+            ? 'bg-white text-slate-900 shadow-sm'
+            : 'text-slate-500 hover:text-slate-700'">
     {{ t.label }}
   </button>
 </div>
 
-<!-- Tab: Dati personali -->
+<!-- Tab: Personal info -->
 <div *ngIf="activeTab === 'info'" class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
   <div class="px-6 py-4 border-b border-slate-100">
-    <h3 class="font-semibold text-slate-900">Dati anagrafici</h3>
+    <h3 class="font-semibold text-slate-900">Personal data</h3>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-50">
+
     <div class="p-6 space-y-5">
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Nome completo</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Full name</p>
         <p class="text-sm font-medium text-slate-800">{{ student.name }} {{ student.surname }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Data di nascita</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Date of birth</p>
         <p class="text-sm font-medium text-slate-800">{{ student.birthDate | formatBirthDate }} · {{ student.birthPlace }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Codice fiscale</p>
-        <p class="text-sm font-mono font-medium text-slate-800">{{ student.codiceFiscale }}</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tax code</p>
+        <p class="text-sm font-mono font-medium text-slate-800">{{ student.taxCode }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Residenza</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Address</p>
         <p class="text-sm font-medium text-slate-800">{{ student.address }}</p>
       </div>
     </div>
+
     <div class="p-6 space-y-5">
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Email universitaria</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">University email</p>
         <p class="text-sm font-medium text-slate-800">{{ student.email }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">PEC</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Certified email (PEC)</p>
         <p class="text-sm font-medium text-slate-800">{{ student.pec }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Telefono</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Phone</p>
         <p class="text-sm font-medium text-slate-800">{{ student.phone }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Matricola</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Student ID</p>
         <p class="text-sm font-mono font-medium text-slate-800">{{ student.studentId }}</p>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- Tab: Carriera -->
+<!-- Tab: Academic record -->
 <div *ngIf="activeTab === 'academic'" class="space-y-4">
 
-  <!-- Program info -->
+  <!-- Program details -->
   <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
     <div class="px-6 py-4 border-b border-slate-100">
-      <h3 class="font-semibold text-slate-900">Programma di studi</h3>
+      <h3 class="font-semibold text-slate-900">Programme details</h3>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-50">
       <div class="p-6 space-y-4">
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Corso di laurea</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Degree programme</p>
           <p class="text-sm font-medium text-slate-800">{{ academic.program }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tipo di laurea</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Degree type</p>
           <p class="text-sm font-medium text-slate-800">{{ academic.degree }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Facoltà</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Faculty</p>
           <p class="text-sm font-medium text-slate-800">{{ academic.faculty }}</p>
         </div>
       </div>
       <div class="p-6 space-y-4">
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Immatricolazione</p>
-          <p class="text-sm font-medium text-slate-800">{{ student.enrolled }}</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Enrolled since</p>
+          <p class="text-sm font-medium text-slate-800">{{ student.enrolledSince }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Scadenza prevista</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Expected graduation</p>
           <p class="text-sm font-medium text-slate-800">{{ student.graduationDate }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Relatore</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Academic advisor</p>
           <p class="text-sm font-medium text-slate-800">{{ student.advisor }}</p>
         </div>
       </div>
@@ -138,52 +140,66 @@
 
   <!-- Requirements progress -->
   <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
-    <h3 class="font-semibold text-slate-900 mb-5">Avanzamento requisiti</h3>
+    <h3 class="font-semibold text-slate-900 mb-5">Requirements progress</h3>
     <div class="space-y-5">
       <div>
         <div class="flex justify-between items-center mb-2">
-          <p class="text-sm font-medium text-slate-700">CFU acquisiti</p>
-          <p class="text-sm font-bold text-slate-900">{{ academic.credits.current }} <span class="font-normal text-slate-400">/ {{ academic.credits.total }}</span></p>
+          <p class="text-sm font-medium text-slate-700">Credits earned</p>
+          <p class="text-sm font-bold text-slate-900">
+            {{ academic.credits.current }}
+            <span class="font-normal text-slate-400">/ {{ academic.credits.total }}</span>
+          </p>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2">
-          <div class="bg-indigo-500 h-2 rounded-full" [style.width]="progressWidth(academic.credits.current, academic.credits.total)"></div>
+          <div class="bg-indigo-500 h-2 rounded-full"
+               [style.width]="progressWidth(academic.credits.current, academic.credits.total)"></div>
         </div>
       </div>
       <div>
         <div class="flex justify-between items-center mb-2">
-          <p class="text-sm font-medium text-slate-700">Esami superati</p>
-          <p class="text-sm font-bold text-slate-900">{{ academic.courses.current }} <span class="font-normal text-slate-400">/ {{ academic.courses.total }}</span></p>
+          <p class="text-sm font-medium text-slate-700">Exams passed</p>
+          <p class="text-sm font-bold text-slate-900">
+            {{ academic.courses.current }}
+            <span class="font-normal text-slate-400">/ {{ academic.courses.total }}</span>
+          </p>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2">
-          <div class="bg-sky-500 h-2 rounded-full" [style.width]="progressWidth(academic.courses.current, academic.courses.total)"></div>
+          <div class="bg-sky-500 h-2 rounded-full"
+               [style.width]="progressWidth(academic.courses.current, academic.courses.total)"></div>
         </div>
       </div>
       <div>
         <div class="flex justify-between items-center mb-2">
-          <p class="text-sm font-medium text-slate-700">Esami a scelta</p>
-          <p class="text-sm font-bold text-slate-900">{{ academic.electives.current }} <span class="font-normal text-slate-400">/ {{ academic.electives.total }}</span></p>
+          <p class="text-sm font-medium text-slate-700">Elective courses</p>
+          <p class="text-sm font-bold text-slate-900">
+            {{ academic.electives.current }}
+            <span class="font-normal text-slate-400">/ {{ academic.electives.total }}</span>
+          </p>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2">
-          <div class="bg-amber-400 h-2 rounded-full" [style.width]="progressWidth(academic.electives.current, academic.electives.total)"></div>
+          <div class="bg-amber-400 h-2 rounded-full"
+               [style.width]="progressWidth(academic.electives.current, academic.electives.total)"></div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-<!-- Tab: Documenti -->
+<!-- Tab: Documents -->
 <div *ngIf="activeTab === 'documents'" class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
   <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-    <h3 class="font-semibold text-slate-900">Documenti caricati</h3>
+    <h3 class="font-semibold text-slate-900">Uploaded documents</h3>
     <button class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
       </svg>
-      Carica documento
+      Upload
     </button>
   </div>
   <div class="divide-y divide-slate-50">
-    <div *ngFor="let doc of documents" class="flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition">
+    <div *ngFor="let doc of documents"
+         class="flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition">
       <div class="flex items-center gap-4">
         <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
           <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -197,11 +213,12 @@
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full"
-          [ngClass]="doc.status === 'Verified'
-            ? 'bg-emerald-50 text-emerald-700'
-            : 'bg-amber-50 text-amber-700'">
-          {{ doc.status === 'Verified' ? 'Verificato' : 'In attesa' }}
+              [ngClass]="doc.status === 'Verified'
+                ? 'bg-emerald-50 text-emerald-700'
+                : 'bg-amber-50 text-amber-700'">
+          {{ doc.status === 'Verified' ? 'Verified' : 'Pending' }}
         </span>
+        <!-- Download button -->
         <button class="text-slate-300 hover:text-slate-500 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>

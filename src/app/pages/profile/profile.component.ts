@@ -1,11 +1,22 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
+
+interface Tab { key: string; label: string; }
+
+interface Document {
+  name: string;
+  type: string;
+  size: string;
+  date: string;
+  status: 'Verified' | 'Pending';
+}
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormatBirthDatePipe],
+  imports: [CommonModule, PageHeaderComponent, FormatBirthDatePipe],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -13,51 +24,51 @@ export class ProfileComponent {
 
   activeTab = 'info';
 
-  tabs = [
-    { key: 'info',      label: 'Dati personali' },
-    { key: 'academic',  label: 'Carriera' },
-    { key: 'documents', label: 'Documenti' },
+  tabs: Tab[] = [
+    { key: 'info',      label: 'Personal info' },
+    { key: 'academic',  label: 'Academic record' },
+    { key: 'documents', label: 'Documents' },
   ];
 
   student = {
     name: 'Anita',
     surname: 'Liberatore',
-    universityArea: 'Ingegneria Informatica',
+    area: 'Computer Engineering',
     studentId: 'S1234567',
     email: 'anita.liberatore@studenti.unito.it',
     pec: 'anita.liberatore@pec.unito.it',
-    address: 'Via Roma 123, 10100 Torino (TO)',
+    address: 'Via Roma 123, 10100 Turin (TO)',
     phone: '+39 320 123 4567',
     birthDate: '1998-04-22',
-    birthPlace: 'Napoli (NA)',
-    codiceFiscale: 'LBRANT98D62F839X',
-    enrollmentStatus: 'ACTIVE',
-    anno: 3,
-    semestre: 1,
-    enrolled: '1 Set 2021',
-    graduationDate: 'Giu 2025',
-    advisor: 'Prof.ssa Laura Bianchi',
+    birthPlace: 'Naples (NA)',
+    taxCode: 'LBRANT98D62F839X',
+    status: 'ACTIVE',
+    year: 3,
+    semester: 1,
+    enrolledSince: 'Sep 1, 2021',
+    graduationDate: 'Jun 2025',
+    advisor: 'Prof. Laura Bianchi',
   };
 
   academic = {
-    program: 'Ingegneria Informatica',
-    degree: 'Laurea Triennale (L-8)',
-    faculty: 'Facoltà di Scienze e Tecnologia',
-    department: 'Dipartimento di Informatica',
-    credits: { current: 53, total: 180 },
-    courses: { current: 6, total: 22 },
-    electives: { current: 0, total: 4 },
-    media: 29.8,
+    program: 'Computer Engineering',
+    degree: 'Bachelor of Science (L-8)',
+    faculty: 'Faculty of Science & Technology',
+    credits:  { current: 53, total: 180 },
+    courses:  { current: 6,  total: 22  },
+    electives:{ current: 0,  total: 4   },
+    gpa: 29.8,
   };
 
-  documents = [
-    { name: 'Certificato di Iscrizione',   type: 'PDF', size: '245 KB', date: '15 Ott 2023', status: 'Verified' },
-    { name: 'Piano di Studi 2023/24',       type: 'PDF', size: '128 KB', date: '5 Set 2023',  status: 'Verified' },
-    { name: "Documento d'Identità",         type: 'JPG', size: '1.2 MB', date: '20 Ago 2023', status: 'Pending'  },
-    { name: 'Attestato Lingua Inglese B2',  type: 'PDF', size: '340 KB', date: '12 Giu 2023', status: 'Verified' },
-    { name: 'Ricevuta Tasse A.A. 2023/24',  type: 'PDF', size: '89 KB',  date: '30 Set 2023', status: 'Verified' },
+  documents: Document[] = [
+    { name: 'Enrollment Certificate',       type: 'PDF', size: '245 KB', date: 'Oct 15, 2023', status: 'Verified' },
+    { name: 'Study Plan 2023/24',           type: 'PDF', size: '128 KB', date: 'Sep 5, 2023',  status: 'Verified' },
+    { name: 'Identity Document',            type: 'JPG', size: '1.2 MB', date: 'Aug 20, 2023', status: 'Pending'  },
+    { name: 'English Certificate B2',       type: 'PDF', size: '340 KB', date: 'Jun 12, 2023', status: 'Verified' },
+    { name: 'Tuition Receipt A.Y. 2023/24', type: 'PDF', size: '89 KB',  date: 'Sep 30, 2023', status: 'Verified' },
   ];
 
+  /** Width string for a CSS progress bar */
   progressWidth(current: number, total: number): string {
     return `${Math.round((current / total) * 100)}%`;
   }
