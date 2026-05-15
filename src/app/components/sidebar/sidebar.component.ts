@@ -18,7 +18,15 @@ export class SidebarComponent {
   /** Logged-in student shown in the footer */
   readonly student = {
     name: 'Anita Liberatore',
-    initials: 'AL',
     id: 'S1234567',
   };
+
+  /** First letter of each word in the name, max 2 characters */
+  get initials(): string {
+    return this.student.name
+      .split(' ')
+      .slice(0, 2)
+      .map(w => w[0].toUpperCase())
+      .join('');
+  }
 }
