@@ -116,8 +116,9 @@
 <app-section-card *ngIf="activeTab === 'documents'" title="Uploaded documents">
   <!-- Upload button projected into the header action slot -->
   <button slot-action
-          class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-slate-600
-                 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
+          (click)="uploadModalOpen = true"
+          class="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-white
+                 bg-indigo-600 rounded-lg hover:bg-indigo-700 shadow-sm transition">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round"
         d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
@@ -130,3 +131,10 @@
     <app-document-row *ngFor="let doc of documents" [doc]="doc"></app-document-row>
   </div>
 </app-section-card>
+
+<!-- Upload modal (rendered outside the tab so it survives tab switches) -->
+<app-upload-modal
+  [isOpen]="uploadModalOpen"
+  (closed)="uploadModalOpen = false"
+  (uploaded)="onDocumentsUploaded($event)">
+</app-upload-modal>

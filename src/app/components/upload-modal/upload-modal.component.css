@@ -1,0 +1,11 @@
+/* Backdrop fade */
+.backdrop-hidden { opacity: 0; }
+.backdrop-visible { opacity: 1; transition: opacity 0.2s ease; }
+
+/* Panel scale + fade */
+.panel-hidden  { opacity: 0; transform: scale(0.95) translateY(8px); }
+.panel-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}

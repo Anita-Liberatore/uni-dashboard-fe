@@ -6,6 +6,7 @@ import { PillTabsComponent, Tab } from '../../components/pill-tabs/pill-tabs.com
 import { SectionCardComponent } from '../../components/section-card/section-card.component';
 import { ProgressItemComponent } from '../../components/progress-item/progress-item.component';
 import { DocumentRowComponent } from '../../components/document-row/document-row.component';
+import { UploadModalComponent } from '../../components/upload-modal/upload-modal.component';
 import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
 import { Student, AcademicRecord } from '../../models/student.model';
 import { StudentDocument } from '../../models/document.model';
@@ -21,6 +22,7 @@ import { StudentDocument } from '../../models/document.model';
     SectionCardComponent,
     ProgressItemComponent,
     DocumentRowComponent,
+    UploadModalComponent,
     FormatBirthDatePipe
   ],
   templateUrl: './profile.component.html',
@@ -29,11 +31,12 @@ import { StudentDocument } from '../../models/document.model';
 export class ProfileComponent {
 
   activeTab = 'info';
+  uploadModalOpen = false;
 
   tabs: Tab[] = [
-    { key: 'info',      label: 'Personal info'    },
-    { key: 'academic',  label: 'Academic record'  },
-    { key: 'documents', label: 'Documents'        },
+    { key: 'info',      label: 'Personal info'   },
+    { key: 'academic',  label: 'Academic record' },
+    { key: 'documents', label: 'Documents'       },
   ];
 
   student: Student = {
@@ -73,4 +76,9 @@ export class ProfileComponent {
     { name: 'English Certificate B2',       type: 'PDF', size: '340 KB', date: 'Jun 12, 2023', status: 'Verified' },
     { name: 'Tuition Receipt A.Y. 2023/24', type: 'PDF', size: '89 KB',  date: 'Sep 30, 2023', status: 'Verified' },
   ];
+
+  /** Prepend newly uploaded documents at the top of the list */
+  onDocumentsUploaded(incoming: StudentDocument[]): void {
+    this.documents = [...incoming, ...this.documents];
+  }
 }
