@@ -1,0 +1,53 @@
+<app-page-header
+  title="Calendar"
+  subtitle="Upcoming exams, deadlines and sessions">
+</app-page-header>
+
+<!-- Legend -->
+<div class="flex items-center gap-5 mb-6">
+  <div class="flex items-center gap-2 text-xs text-slate-500">
+    <span class="w-2 h-2 rounded-full bg-indigo-500"></span> Exam
+  </div>
+  <div class="flex items-center gap-2 text-xs text-slate-500">
+    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Deadline
+  </div>
+  <div class="flex items-center gap-2 text-xs text-slate-500">
+    <span class="w-2 h-2 rounded-full bg-sky-500"></span> Lecture
+  </div>
+</div>
+
+<!-- Events list -->
+<div class="space-y-3">
+  <div *ngFor="let ev of events"
+       class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 shadow-xs border transition-shadow hover:shadow-sm"
+       [class.border-amber-200]="ev.urgent"
+       [class.border-slate-100]="!ev.urgent">
+
+    <!-- Type dot -->
+    <span class="w-2.5 h-2.5 rounded-full shrink-0" [ngClass]="typeDot(ev.type)"></span>
+
+    <!-- Date block -->
+    <div class="shrink-0 w-24 text-xs text-slate-400 font-medium">
+      <p class="text-slate-700 font-semibold text-sm">{{ ev.date }}</p>
+      <p>{{ ev.time }}</p>
+    </div>
+
+    <!-- Course + room -->
+    <div class="flex-1 min-w-0">
+      <p class="text-sm font-semibold text-slate-800 truncate">{{ ev.course }}</p>
+      <p *ngIf="ev.room" class="text-xs text-slate-400 mt-0.5">{{ ev.room }}</p>
+    </div>
+
+    <!-- Type badge -->
+    <span class="text-xs font-semibold px-2.5 py-1 rounded-full shrink-0"
+          [ngClass]="typeClass(ev.type)">
+      {{ ev.type }}
+    </span>
+
+    <!-- Urgent indicator -->
+    <span *ngIf="ev.urgent"
+          class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full shrink-0">
+      Soon
+    </span>
+  </div>
+</div>

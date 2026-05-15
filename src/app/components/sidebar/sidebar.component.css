@@ -1,22 +1,50 @@
+/* ── Nav item base ── */
 .nav-item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 0.75rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.625rem;        /* 10px */
   font-size: 0.875rem;
   font-weight: 500;
-  color: #94a3b8;
-  transition: background 0.15s, color 0.15s;
+  color: #94a3b8;                 /* slate-400 */
   text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+  position: relative;
 }
 
+/* ── Hover ── */
 .nav-item:hover {
-  background: #1e293b;
-  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;                 /* slate-200 */
 }
 
+/* ── Active (applied by routerLinkActive) ── */
 .nav-active {
-  background: #4f46e5 !important;
+  background: #4f46e5 !important; /* indigo-600 */
   color: #ffffff !important;
+  box-shadow: 0 1px 8px rgba(79, 70, 229, 0.35);
+}
+
+/* Active badge uses a white semi-transparent tint */
+.nav-active .nav-badge {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* ── Notification / event count badge ── */
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.35rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  background: #ef4444;            /* red-500 */
+  color: #ffffff;
+  flex-shrink: 0;
 }
