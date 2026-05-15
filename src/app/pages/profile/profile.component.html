@@ -4,7 +4,7 @@
 </app-page-header>
 
 <!-- Hero card -->
-<app-profile-hero [student]="student" [academic]="academic"></app-profile-hero>
+<app-profile-hero [student]="student()" [academic]="academic()"></app-profile-hero>
 
 <!-- Tab switcher -->
 <app-pill-tabs [tabs]="tabs" [activeTab]="activeTab" (tabChange)="activeTab = $event">
@@ -17,40 +17,40 @@
     <div class="p-6 space-y-5">
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Full name</p>
-        <p class="text-sm font-medium text-slate-800">{{ student.name }} {{ student.surname }}</p>
+        <p class="text-sm font-medium text-slate-800">{{ student().name }} {{ student().surname }}</p>
       </div>
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Date of birth</p>
         <p class="text-sm font-medium text-slate-800">
-          {{ student.birthDate | formatBirthDate }} · {{ student.birthPlace }}
+          {{ student().birthDate | formatBirthDate }} · {{ student().birthPlace }}
         </p>
       </div>
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tax code</p>
-        <p class="text-sm font-mono font-medium text-slate-800">{{ student.taxCode }}</p>
+        <p class="text-sm font-mono font-medium text-slate-800">{{ student().taxCode }}</p>
       </div>
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Address</p>
-        <p class="text-sm font-medium text-slate-800">{{ student.address }}</p>
+        <p class="text-sm font-medium text-slate-800">{{ student().address }}</p>
       </div>
     </div>
 
     <div class="p-6 space-y-5">
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">University email</p>
-        <p class="text-sm font-medium text-slate-800">{{ student.email }}</p>
+        <p class="text-sm font-medium text-slate-800">{{ student().email }}</p>
       </div>
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Certified email (PEC)</p>
-        <p class="text-sm font-medium text-slate-800">{{ student.pec }}</p>
+        <p class="text-sm font-medium text-slate-800">{{ student().pec }}</p>
       </div>
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Phone</p>
-        <p class="text-sm font-medium text-slate-800">{{ student.phone }}</p>
+        <p class="text-sm font-medium text-slate-800">{{ student().phone }}</p>
       </div>
       <div>
         <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Student ID</p>
-        <p class="text-sm font-mono font-medium text-slate-800">{{ student.studentId }}</p>
+        <p class="text-sm font-mono font-medium text-slate-800">{{ student().studentId }}</p>
       </div>
     </div>
 
@@ -65,29 +65,29 @@
       <div class="p-6 space-y-4">
         <div>
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Degree programme</p>
-          <p class="text-sm font-medium text-slate-800">{{ academic.program }}</p>
+          <p class="text-sm font-medium text-slate-800">{{ academic().program }}</p>
         </div>
         <div>
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Degree type</p>
-          <p class="text-sm font-medium text-slate-800">{{ academic.degree }}</p>
+          <p class="text-sm font-medium text-slate-800">{{ academic().degree }}</p>
         </div>
         <div>
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Faculty</p>
-          <p class="text-sm font-medium text-slate-800">{{ academic.faculty }}</p>
+          <p class="text-sm font-medium text-slate-800">{{ academic().faculty }}</p>
         </div>
       </div>
       <div class="p-6 space-y-4">
         <div>
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Enrolled since</p>
-          <p class="text-sm font-medium text-slate-800">{{ student.enrolledSince }}</p>
+          <p class="text-sm font-medium text-slate-800">{{ student().enrolledSince }}</p>
         </div>
         <div>
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Expected graduation</p>
-          <p class="text-sm font-medium text-slate-800">{{ student.graduationDate }}</p>
+          <p class="text-sm font-medium text-slate-800">{{ student().graduationDate }}</p>
         </div>
         <div>
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Academic advisor</p>
-          <p class="text-sm font-medium text-slate-800">{{ student.advisor }}</p>
+          <p class="text-sm font-medium text-slate-800">{{ student().advisor }}</p>
         </div>
       </div>
     </div>
@@ -96,15 +96,15 @@
   <app-section-card title="Requirements progress">
     <div class="p-6 space-y-5">
       <app-progress-item label="Credits earned"
-        [current]="academic.credits.current" [total]="academic.credits.total"
+        [current]="academic().credits.current" [total]="academic().credits.total"
         barClass="bg-indigo-500">
       </app-progress-item>
       <app-progress-item label="Exams passed"
-        [current]="academic.courses.current" [total]="academic.courses.total"
+        [current]="academic().courses.current" [total]="academic().courses.total"
         barClass="bg-sky-500">
       </app-progress-item>
       <app-progress-item label="Elective courses"
-        [current]="academic.electives.current" [total]="academic.electives.total"
+        [current]="academic().electives.current" [total]="academic().electives.total"
         barClass="bg-amber-400">
       </app-progress-item>
     </div>
@@ -114,7 +114,6 @@
 
 <!-- ── Tab: Documents ── -->
 <app-section-card *ngIf="activeTab === 'documents'" title="Uploaded documents">
-  <!-- Upload button projected into the header action slot -->
   <button slot-action
           (click)="uploadModalOpen = true"
           class="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-white
@@ -126,9 +125,8 @@
     Upload
   </button>
 
-  <!-- One document-row component per document -->
   <div class="divide-y divide-slate-50">
-    <app-document-row *ngFor="let doc of documents" [doc]="doc"></app-document-row>
+    <app-document-row *ngFor="let doc of documents()" [doc]="doc"></app-document-row>
   </div>
 </app-section-card>
 

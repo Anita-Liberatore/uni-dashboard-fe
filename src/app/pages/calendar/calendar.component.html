@@ -18,7 +18,7 @@
 
 <!-- Events list -->
 <div class="space-y-3">
-  <div *ngFor="let ev of events"
+  <div *ngFor="let ev of events()"
        class="flex items-center gap-4 bg-white rounded-xl px-5 py-4 shadow-xs border transition-shadow hover:shadow-sm"
        [class.border-amber-200]="ev.urgent"
        [class.border-slate-100]="!ev.urgent">

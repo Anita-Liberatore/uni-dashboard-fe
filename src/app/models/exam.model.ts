@@ -7,3 +7,10 @@ export interface Exam {
   credits: number;
   year?: number;
 }
+
+export interface UpcomingExam {
+  course: string;
+  date: string;
+  credits: number;
+  urgent: boolean;
+}

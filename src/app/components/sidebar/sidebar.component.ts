@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import { NAV_ITEMS, NavItem } from '../../config/nav.config';
+import { StudentService } from '../../services/student.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,21 +15,27 @@ import { NAV_ITEMS, NavItem } from '../../config/nav.config';
 })
 export class SidebarComponent {
 
-  /** Nav items are driven entirely by nav.config.ts */
+  private readonly svc = inject(StudentService);
+
+  /** Nav items driven by nav.config.ts — add a route there, not here */
   readonly navItems: NavItem[] = NAV_ITEMS;
 
-  /** Logged-in student shown in the footer */
-  readonly student = {
-    name: 'Anita Liberatore',
-    id: 'S1234567',
-  };
+  // requireSync: true is safe because of() emits synchronously.
+  // When switching to http.get(), remove requireSync and handle undefined.
+  private readonly profile = toSignal(this.svc.getProfile(), { requireSync: true });
 
-  /** First letter of each word in the name, max 2 characters */
-  get initials(): string {
-    return this.student.name
+  readonly displayName = computed(() => {
+    const p = this.profile();
+    return `${p.name} ${p.surname}`;
+  });
+
+  readonly studentId = computed(() => this.profile().studentId);
+
+  readonly initials = computed(() =>
+    this.displayName()
       .split(' ')
       .slice(0, 2)
-      .map(w => w[0].toUpperCase())
-      .join('');
-  }
+      .map(w => w[0]?.toUpperCase() ?? '')
+      .join('')
+  );
 }

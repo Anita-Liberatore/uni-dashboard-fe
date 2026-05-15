@@ -1,24 +1,20 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { StatCardComponent } from '../../components/stat-card/stat-card.component';
 import { SectionCardComponent } from '../../components/section-card/section-card.component';
+import { StudentService } from '../../services/student.service';
 import { Exam } from '../../models/exam.model';
-
-interface UpcomingExam {
-  course: string;
-  date: string;
-  credits: number;
-  urgent: boolean;
-}
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    RouterModule,
     CommonModule,
+    RouterModule,
     PageHeaderComponent,
     StatCardComponent,
     SectionCardComponent,
@@ -28,27 +24,33 @@ interface UpcomingExam {
 })
 export class HomeComponent {
 
-  student = {
-    name: 'Anita',
-    surname: 'Liberatore',
-    area: 'Computer Engineering',
-    year: 3,
-    studentId: 'S1234567',
-    graduationDate: 'Jun 2025'
-  };
+  private readonly svc = inject(StudentService);
 
-  recentExams: Exam[] = [
-    { course: 'Algorithms & Data Structures', date: 'Jan 18, 2024', grade: 30, lode: true,  credits: 9 },
-    { course: 'Databases',                    date: 'Jun 20, 2023', grade: 28, lode: false, credits: 9 },
-    { course: 'Programming II',               date: 'Feb 15, 2023', grade: 30, lode: true,  credits: 9 },
-    { course: 'Computer Networks',            date: 'Jan 12, 2023', grade: 27, lode: false, credits: 6 },
-  ];
+  readonly student  = toSignal(this.svc.getProfile(),       { requireSync: true });
+  readonly academic = toSignal(this.svc.getAcademicRecord(), { requireSync: true });
+  readonly upcoming = toSignal(this.svc.getExamsUpcoming(),  { requireSync: true });
 
-  upcomingExams: UpcomingExam[] = [
-    { course: 'Operating Systems',       date: 'May 28, 2024', credits: 9, urgent: true  },
-    { course: 'Software Engineering',    date: 'Jun 15, 2024', credits: 9, urgent: false },
-    { course: 'Artificial Intelligence', date: 'Jul 10, 2024', credits: 6, urgent: false },
-  ];
+  private readonly allExams = toSignal(this.svc.getExamsPassed(), { requireSync: true });
+
+  /** Last 4 exams shown on the dashboard */
+  readonly recentExams = computed(() => this.allExams().slice(0, 4));
+
+  // ── Computed values for stat cards ────────────────────────────────────────
+
+  readonly gpa = computed(() => this.academic().gpa.toFixed(1));
+
+  readonly creditsEarned  = computed(() => this.academic().credits.current);
+  readonly creditsTotal   = computed(() => this.academic().credits.total);
+  readonly creditsPct     = computed(() =>
+    Math.round((this.academic().credits.current / this.academic().credits.total) * 100)
+  );
+
+  readonly examsPassed    = computed(() => this.academic().courses.current);
+  readonly examsTotal     = computed(() => this.academic().courses.total);
+  readonly examsRemaining = computed(() => this.academic().courses.total - this.academic().courses.current);
+  readonly honorCount     = computed(() => this.allExams().filter(e => e.lode).length);
+
+  // ── Template helpers ──────────────────────────────────────────────────────
 
   /** Square color class for the grade indicator in the recent-exams list */
   gradeSquareClass(grade: number): string {

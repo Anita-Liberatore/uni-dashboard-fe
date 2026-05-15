@@ -1,15 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
-interface CalendarEvent {
-  course: string;
-  type: 'Exam' | 'Deadline' | 'Lecture';
-  date: string;
-  time: string;
-  room?: string;
-  urgent: boolean;
-}
+import { PageHeaderComponent } from '../../components/page-header/page-header.component';
+import { StudentService } from '../../services/student.service';
+import { CalendarEvent } from '../../models/calendar.model';
 
 @Component({
   selector: 'app-calendar',
@@ -20,13 +15,9 @@ interface CalendarEvent {
 })
 export class CalendarComponent {
 
-  events: CalendarEvent[] = [
-    { course: 'Operating Systems',       type: 'Exam',     date: 'May 28, 2024', time: '09:00', room: 'Aula A1',  urgent: true  },
-    { course: 'Software Engineering',    type: 'Deadline', date: 'Jun 5, 2024',  time: '23:59',                   urgent: true  },
-    { course: 'Artificial Intelligence', type: 'Exam',     date: 'Jun 15, 2024', time: '10:30', room: 'Aula B3',  urgent: false },
-    { course: 'Statistics',              type: 'Exam',     date: 'Jul 3, 2024',  time: '09:00', room: 'Aula C2',  urgent: false },
-    { course: 'Bachelor Thesis I',       type: 'Deadline', date: 'Sep 30, 2024', time: '12:00',                   urgent: false },
-  ];
+  private readonly svc = inject(StudentService);
+
+  readonly events = toSignal(this.svc.getCalendarEvents(), { requireSync: true });
 
   typeClass(type: CalendarEvent['type']): string {
     return {
