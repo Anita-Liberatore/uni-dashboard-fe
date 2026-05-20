@@ -31,6 +31,14 @@ export const EMPTY_STUDENT: Student = {
   enrolledSince: '', graduationDate: '', advisor: '',
 };
 
+export const EMPTY_ACADEMIC: AcademicRecord = {
+  program: '', degree: '', faculty: '',
+  credits:   { current: 0, total: 1 },
+  courses:   { current: 0, total: 1 },
+  electives: { current: 0, total: 1 },
+  gpa: 0,
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Mock data
 // Remove each constant as its endpoint is implemented in the Go backend.

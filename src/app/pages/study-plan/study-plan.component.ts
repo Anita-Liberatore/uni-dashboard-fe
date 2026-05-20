@@ -17,5 +17,5 @@ export class StudyPlanComponent {
 
   private readonly svc = inject(StudentService);
 
-  readonly plan = toSignal(this.svc.getStudyPlan(), { requireSync: true });
+  readonly plan = toSignal(this.svc.getStudyPlan(), { initialValue: [] });
 }

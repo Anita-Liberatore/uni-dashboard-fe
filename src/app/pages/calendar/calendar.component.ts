@@ -28,7 +28,7 @@ export interface EventGroup {
 export class CalendarComponent {
 
   private readonly svc       = inject(StudentService);
-  private readonly allEvents = toSignal(this.svc.getCalendarEvents(), { requireSync: true });
+  private readonly allEvents = toSignal(this.svc.getCalendarEvents(), { initialValue: [] });
 
   // ── Filter ────────────────────────────────────────────────────────────────
 

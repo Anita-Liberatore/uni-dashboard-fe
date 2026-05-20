@@ -10,7 +10,7 @@ import { ProgressItemComponent } from '../../components/progress-item/progress-i
 import { DocumentRowComponent } from '../../custom/document-row/document-row.component';
 import { UploadModalComponent } from '../../custom/upload-modal/upload-modal.component';
 import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
-import { StudentService, EMPTY_STUDENT } from '../../services/student.service';
+import { StudentService, EMPTY_STUDENT, EMPTY_ACADEMIC } from '../../services/student.service';
 import { StudentDocument } from '../../models/document.model';
 
 @Component({
@@ -35,15 +35,12 @@ export class ProfileComponent {
   private readonly svc = inject(StudentService);
 
   readonly student  = toSignal(this.svc.getProfile(),        { initialValue: EMPTY_STUDENT });
-  readonly academic = toSignal(this.svc.getAcademicRecord(), { requireSync: true });
+  readonly academic = toSignal(this.svc.getAcademicRecord(), { initialValue: EMPTY_ACADEMIC });
 
-  // Documents are writable: the upload modal can prepend new ones.
-  private readonly _documents = signal(
-    this.svc.getDocuments() as unknown as StudentDocument[]
-  );
+  // Documents are writable so the upload modal can prepend new entries.
+  private readonly _documents = signal<StudentDocument[]>([]);
 
   constructor() {
-    // Initialize from service (synchronous with of())
     this.svc.getDocuments().subscribe(d => this._documents.set(d));
   }
 

@@ -18,7 +18,7 @@ export class ExamsComponent {
 
   private readonly svc = inject(StudentService);
 
-  readonly exams = toSignal(this.svc.getExamsPassed(), { requireSync: true });
+  readonly exams = toSignal(this.svc.getExamsPassed(), { initialValue: [] });
 
   readonly average      = computed(() =>
     (this.exams().reduce((s, e) => s + e.grade, 0) / this.exams().length).toFixed(1)
