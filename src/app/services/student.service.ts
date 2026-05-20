@@ -139,12 +139,14 @@ const MOCK_CALENDAR: CalendarEvent[] = [
 @Injectable({ providedIn: 'root' })
 export class StudentService {
 
-  private readonly http    = inject(HttpClient);
-  private readonly baseUrl = '/api/v1';
+  private readonly http      = inject(HttpClient);
+  private readonly baseUrl   = '/api/v1';
+  // TODO: derive from auth token once authentication is implemented
+  private readonly studentId = 'S1234567';
 
-  /** GET /api/v1/me */
+  /** GET /api/v1/students/{studentId} */
   getProfile(): Observable<Student> {
-    return this.http.get<Student>(`${this.baseUrl}/me`);
+    return this.http.get<Student>(`${this.baseUrl}/students/${this.studentId}`);
   }
 
   /** GET /api/v1/me/academic */
