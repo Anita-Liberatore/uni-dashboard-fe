@@ -24,7 +24,7 @@ import { CalendarEvent }           from '../models/calendar.model';
 const MOCK_STUDENT: Student = {
   name:           'Anita',
   surname:        'Liberatore',
-  area:           'Computer Engineering',
+  area:           'Ingegneria Informatica',
   studentId:      'S1234567',
   email:          'anita.liberatore@studenti.unito.it',
   pec:            'anita.liberatore@pec.unito.it',
@@ -42,9 +42,9 @@ const MOCK_STUDENT: Student = {
 };
 
 const MOCK_ACADEMIC: AcademicRecord = {
-  program:   'Computer Engineering',
-  degree:    'Bachelor of Science (L-8)',
-  faculty:   'Faculty of Science & Technology',
+  program:   'Ingegneria Informatica',
+  degree:    'Laurea Triennale (L-8)',
+  faculty:   'Facoltà di Scienze e Tecnologia',
   credits:   { current: 53,  total: 180 },
   courses:   { current: 6,   total: 22  },
   electives: { current: 0,   total: 4   },
@@ -52,52 +52,52 @@ const MOCK_ACADEMIC: AcademicRecord = {
 };
 
 const MOCK_EXAMS_PASSED: Exam[] = [
-  { course: 'Algorithms & Data Structures', area: 'CS',   date: 'Jan 18, 2024', grade: 30, lode: true,  credits: 9,  year: 3 },
-  { course: 'Databases',                    area: 'CS',   date: 'Jun 20, 2023', grade: 28, lode: false, credits: 9,  year: 2 },
-  { course: 'Computer Networks',            area: 'Nets', date: 'Jan 12, 2023', grade: 27, lode: false, credits: 6,  year: 2 },
-  { course: 'Programming II',               area: 'CS',   date: 'Feb 15, 2023', grade: 30, lode: true,  credits: 9,  year: 2 },
-  { course: 'Calculus II',                  area: 'Math', date: 'Jul 10, 2022', grade: 26, lode: false, credits: 12, year: 1 },
-  { course: 'Programming I',                area: 'CS',   date: 'Jan 20, 2022', grade: 30, lode: true,  credits: 9,  year: 1 },
+  { course: 'Algoritmi e Strutture Dati', area: 'Inf.',  date: 'Jan 18, 2024', grade: 30, lode: true,  credits: 9,  year: 3 },
+  { course: 'Basi di Dati',              area: 'Inf.',  date: 'Jun 20, 2023', grade: 28, lode: false, credits: 9,  year: 2 },
+  { course: 'Reti di Calcolatori',       area: 'Reti',  date: 'Jan 12, 2023', grade: 27, lode: false, credits: 6,  year: 2 },
+  { course: 'Programmazione II',         area: 'Inf.',  date: 'Feb 15, 2023', grade: 30, lode: true,  credits: 9,  year: 2 },
+  { course: 'Analisi Matematica II',     area: 'Mat.',  date: 'Jul 10, 2022', grade: 26, lode: false, credits: 12, year: 1 },
+  { course: 'Programmazione I',          area: 'Inf.',  date: 'Jan 20, 2022', grade: 30, lode: true,  credits: 9,  year: 1 },
 ];
 
 const MOCK_EXAMS_UPCOMING: UpcomingExam[] = [
-  { course: 'Operating Systems',       date: 'May 28, 2024', credits: 9, urgent: true  },
-  { course: 'Software Engineering',    date: 'Jun 15, 2024', credits: 9, urgent: false },
-  { course: 'Artificial Intelligence', date: 'Jul 10, 2024', credits: 6, urgent: false },
+  { course: 'Sistemi Operativi',      date: 'May 28, 2024', credits: 9, urgent: true  },
+  { course: 'Ingegneria del Software', date: 'Jun 15, 2024', credits: 9, urgent: false },
+  { course: 'Intelligenza Artificiale', date: 'Jul 10, 2024', credits: 6, urgent: false },
 ];
 
 const MOCK_STUDY_PLAN: YearPlan[] = [
   {
     year: 1,
     courses: [
-      { name: 'Calculus I',            credits: 12, semester: 1, passed: true,  grade: 26             },
-      { name: 'Programming I',         credits: 9,  semester: 1, passed: true,  grade: 30, lode: true },
-      { name: 'Linear Algebra',        credits: 9,  semester: 1, passed: true,  grade: 27             },
-      { name: 'Calculus II',           credits: 12, semester: 2, passed: true,  grade: 26             },
-      { name: 'Physics I',             credits: 9,  semester: 2, passed: false                        },
-      { name: 'Computer Architecture', credits: 6,  semester: 2, passed: false                        },
+      { name: 'Analisi Matematica I',        credits: 12, semester: 1, passed: true,  grade: 26             },
+      { name: 'Programmazione I',            credits: 9,  semester: 1, passed: true,  grade: 30, lode: true },
+      { name: 'Algebra Lineare',             credits: 9,  semester: 1, passed: true,  grade: 27             },
+      { name: 'Analisi Matematica II',       credits: 12, semester: 2, passed: true,  grade: 26             },
+      { name: 'Fisica I',                    credits: 9,  semester: 2, passed: false                        },
+      { name: 'Architettura degli Elaboratori', credits: 6, semester: 2, passed: false                      },
     ],
   },
   {
     year: 2,
     courses: [
-      { name: 'Programming II',      credits: 9,  semester: 1, passed: true,  grade: 30, lode: true },
-      { name: 'Databases',           credits: 9,  semester: 1, passed: true,  grade: 28             },
-      { name: 'Computer Networks',   credits: 6,  semester: 1, passed: true,  grade: 27             },
-      { name: 'Operating Systems',   credits: 9,  semester: 2, passed: false                        },
-      { name: 'Software Engineering',credits: 9,  semester: 2, passed: false                        },
-      { name: 'Statistics',          credits: 6,  semester: 2, passed: false                        },
+      { name: 'Programmazione II',      credits: 9, semester: 1, passed: true,  grade: 30, lode: true },
+      { name: 'Basi di Dati',           credits: 9, semester: 1, passed: true,  grade: 28             },
+      { name: 'Reti di Calcolatori',    credits: 6, semester: 1, passed: true,  grade: 27             },
+      { name: 'Sistemi Operativi',      credits: 9, semester: 2, passed: false                        },
+      { name: 'Ingegneria del Software',credits: 9, semester: 2, passed: false                        },
+      { name: 'Statistica',             credits: 6, semester: 2, passed: false                        },
     ],
   },
   {
     year: 3,
     courses: [
-      { name: 'Algorithms & Data Structures', credits: 9, semester: 1, passed: true,  grade: 30, lode: true },
-      { name: 'Artificial Intelligence',      credits: 6, semester: 1, passed: false                        },
-      { name: 'Cybersecurity',                credits: 6, semester: 1, passed: false                        },
-      { name: 'Bachelor Thesis I',            credits: 6, semester: 2, passed: false                        },
-      { name: 'Elective I',                   credits: 6, semester: 2, passed: false                        },
-      { name: 'Elective II',                  credits: 6, semester: 2, passed: false                        },
+      { name: 'Algoritmi e Strutture Dati', credits: 9, semester: 1, passed: true,  grade: 30, lode: true },
+      { name: 'Intelligenza Artificiale',   credits: 6, semester: 1, passed: false                        },
+      { name: 'Sicurezza Informatica',      credits: 6, semester: 1, passed: false                        },
+      { name: 'Tesi di Laurea I',           credits: 6, semester: 2, passed: false                        },
+      { name: 'Corso a Scelta I',           credits: 6, semester: 2, passed: false                        },
+      { name: 'Corso a Scelta II',          credits: 6, semester: 2, passed: false                        },
     ],
   },
 ];
@@ -111,11 +111,11 @@ const MOCK_DOCUMENTS: StudentDocument[] = [
 ];
 
 const MOCK_CALENDAR: CalendarEvent[] = [
-  { course: 'Operating Systems',       type: 'Exam',     date: 'May 28, 2024', time: '09:00', room: 'Aula A1', urgent: true  },
-  { course: 'Software Engineering',    type: 'Deadline', date: 'Jun 5, 2024',  time: '23:59',                  urgent: true  },
-  { course: 'Artificial Intelligence', type: 'Exam',     date: 'Jun 15, 2024', time: '10:30', room: 'Aula B3', urgent: false },
-  { course: 'Statistics',              type: 'Exam',     date: 'Jul 3, 2024',  time: '09:00', room: 'Aula C2', urgent: false },
-  { course: 'Bachelor Thesis I',       type: 'Deadline', date: 'Sep 30, 2024', time: '12:00',                  urgent: false },
+  { course: 'Sistemi Operativi',       type: 'Exam',     date: 'May 28, 2024', time: '09:00', room: 'Aula A1', urgent: true  },
+  { course: 'Ingegneria del Software', type: 'Deadline', date: 'Jun 5, 2024',  time: '23:59',                  urgent: true  },
+  { course: 'Intelligenza Artificiale',type: 'Exam',     date: 'Jun 15, 2024', time: '10:30', room: 'Aula B3', urgent: false },
+  { course: 'Statistica',              type: 'Exam',     date: 'Jul 3, 2024',  time: '09:00', room: 'Aula C2', urgent: false },
+  { course: 'Tesi di Laurea I',        type: 'Deadline', date: 'Sep 30, 2024', time: '12:00',                  urgent: false },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
