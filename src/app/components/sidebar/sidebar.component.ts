@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { NAV_ITEMS, NavItem } from '../../config/nav.config';
-import { StudentService } from '../../services/student.service';
+import { StudentService, EMPTY_STUDENT } from '../../services/student.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,9 +20,7 @@ export class SidebarComponent {
   /** Nav items driven by nav.config.ts — add a route there, not here */
   readonly navItems: NavItem[] = NAV_ITEMS;
 
-  // requireSync: true is safe because of() emits synchronously.
-  // When switching to http.get(), remove requireSync and handle undefined.
-  private readonly profile = toSignal(this.svc.getProfile(), { requireSync: true });
+  private readonly profile = toSignal(this.svc.getProfile(), { initialValue: EMPTY_STUDENT });
 
   readonly displayName = computed(() => {
     const p = this.profile();

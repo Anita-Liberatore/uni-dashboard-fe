@@ -10,7 +10,7 @@ import { ProgressItemComponent } from '../../components/progress-item/progress-i
 import { DocumentRowComponent } from '../../custom/document-row/document-row.component';
 import { UploadModalComponent } from '../../custom/upload-modal/upload-modal.component';
 import { FormatBirthDatePipe } from '../../format-birth-date.pipe';
-import { StudentService } from '../../services/student.service';
+import { StudentService, EMPTY_STUDENT } from '../../services/student.service';
 import { StudentDocument } from '../../models/document.model';
 
 @Component({
@@ -34,7 +34,7 @@ export class ProfileComponent {
 
   private readonly svc = inject(StudentService);
 
-  readonly student  = toSignal(this.svc.getProfile(),        { requireSync: true });
+  readonly student  = toSignal(this.svc.getProfile(),        { initialValue: EMPTY_STUDENT });
   readonly academic = toSignal(this.svc.getAcademicRecord(), { requireSync: true });
 
   // Documents are writable: the upload modal can prepend new ones.

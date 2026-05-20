@@ -7,7 +7,8 @@
  * and uncomment the HttpClient injection below.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Student, AcademicRecord } from '../models/student.model';
@@ -17,8 +18,21 @@ import { StudentDocument }         from '../models/document.model';
 import { CalendarEvent }           from '../models/calendar.model';
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Initial / empty state
+// Used as initialValue in toSignal() calls so components never receive undefined
+// while the first HTTP response is in flight.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const EMPTY_STUDENT: Student = {
+  name: '', surname: '', area: '', studentId: '', email: '',
+  pec: '', address: '', phone: '', birthDate: '', birthPlace: '',
+  taxCode: '', status: 'ACTIVE', year: 0, semester: 0,
+  enrolledSince: '', graduationDate: '', advisor: '',
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Mock data
-// Replace with real HTTP responses once the Go API is ready.
+// Remove each constant as its endpoint is implemented in the Go backend.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const MOCK_STUDENT: Student = {
@@ -125,14 +139,12 @@ const MOCK_CALENDAR: CalendarEvent[] = [
 @Injectable({ providedIn: 'root' })
 export class StudentService {
 
-  // ── Uncomment when the Go API is ready ──────────────────────────────────
-  // private readonly http    = inject(HttpClient);
-  // private readonly baseUrl = '/api/v1';
-  // ─────────────────────────────────────────────────────────────────────────
+  private readonly http    = inject(HttpClient);
+  private readonly baseUrl = '/api/v1';
 
   /** GET /api/v1/me */
   getProfile(): Observable<Student> {
-    return of(MOCK_STUDENT);
+    return this.http.get<Student>(`${this.baseUrl}/me`);
   }
 
   /** GET /api/v1/me/academic */

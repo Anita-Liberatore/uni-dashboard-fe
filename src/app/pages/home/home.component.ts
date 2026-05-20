@@ -6,7 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { StatCardComponent } from '../../components/stat-card/stat-card.component';
 import { SectionCardComponent } from '../../components/section-card/section-card.component';
-import { StudentService } from '../../services/student.service';
+import { StudentService, EMPTY_STUDENT } from '../../services/student.service';
 import { Exam } from '../../models/exam.model';
 
 @Component({
@@ -26,7 +26,7 @@ export class HomeComponent {
 
   private readonly svc = inject(StudentService);
 
-  readonly student   = toSignal(this.svc.getProfile(),       { requireSync: true });
+  readonly student   = toSignal(this.svc.getProfile(),       { initialValue: EMPTY_STUDENT });
   readonly academic = toSignal(this.svc.getAcademicRecord(), { requireSync: true });
   readonly upcoming = toSignal(this.svc.getExamsUpcoming(),  { requireSync: true });
 
