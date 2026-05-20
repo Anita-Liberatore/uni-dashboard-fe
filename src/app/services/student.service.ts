@@ -10,6 +10,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { Student, AcademicRecord } from '../models/student.model';
 import { Exam, UpcomingExam }      from '../models/exam.model';
@@ -144,38 +145,47 @@ export class StudentService {
   // TODO: derive from auth token once authentication is implemented
   private readonly studentId = 'S1234567';
 
+  private get sid(): string { return `students/${this.studentId}`; }
+
   /** GET /api/v1/students/{studentId} */
   getProfile(): Observable<Student> {
-    return this.http.get<Student>(`${this.baseUrl}/students/${this.studentId}`);
+    return this.http.get<Student>(`${this.baseUrl}/${this.sid}`)
+      .pipe(catchError(() => of(MOCK_STUDENT)));
   }
 
-  /** GET /api/v1/me/academic */
+  /** GET /api/v1/students/{studentId}/academic */
   getAcademicRecord(): Observable<AcademicRecord> {
-    return of(MOCK_ACADEMIC);
+    return this.http.get<AcademicRecord>(`${this.baseUrl}/${this.sid}/academic`)
+      .pipe(catchError(() => of(MOCK_ACADEMIC)));
   }
 
-  /** GET /api/v1/me/exams */
+  /** GET /api/v1/students/{studentId}/exams */
   getExamsPassed(): Observable<Exam[]> {
-    return of(MOCK_EXAMS_PASSED);
+    return this.http.get<Exam[]>(`${this.baseUrl}/${this.sid}/exams`)
+      .pipe(catchError(() => of(MOCK_EXAMS_PASSED)));
   }
 
-  /** GET /api/v1/me/exams/upcoming */
+  /** GET /api/v1/students/{studentId}/exams/upcoming */
   getExamsUpcoming(): Observable<UpcomingExam[]> {
-    return of(MOCK_EXAMS_UPCOMING);
+    return this.http.get<UpcomingExam[]>(`${this.baseUrl}/${this.sid}/exams/upcoming`)
+      .pipe(catchError(() => of(MOCK_EXAMS_UPCOMING)));
   }
 
-  /** GET /api/v1/me/study-plan */
+  /** GET /api/v1/students/{studentId}/study-plan */
   getStudyPlan(): Observable<YearPlan[]> {
-    return of(MOCK_STUDY_PLAN);
+    return this.http.get<YearPlan[]>(`${this.baseUrl}/${this.sid}/study-plan`)
+      .pipe(catchError(() => of(MOCK_STUDY_PLAN)));
   }
 
-  /** GET /api/v1/me/documents */
+  /** GET /api/v1/students/{studentId}/documents */
   getDocuments(): Observable<StudentDocument[]> {
-    return of(MOCK_DOCUMENTS);
+    return this.http.get<StudentDocument[]>(`${this.baseUrl}/${this.sid}/documents`)
+      .pipe(catchError(() => of(MOCK_DOCUMENTS)));
   }
 
-  /** GET /api/v1/me/calendar */
+  /** GET /api/v1/students/{studentId}/calendar */
   getCalendarEvents(): Observable<CalendarEvent[]> {
-    return of(MOCK_CALENDAR);
+    return this.http.get<CalendarEvent[]>(`${this.baseUrl}/${this.sid}/calendar`)
+      .pipe(catchError(() => of(MOCK_CALENDAR)));
   }
 }
