@@ -4,11 +4,11 @@
   <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
     <div class="flex items-center gap-3">
       <span class="text-xs font-bold px-2.5 py-1 rounded-lg" [ngClass]="pillClass">
-        Year {{ year.year }}
+        Anno {{ year.year }}
       </span>
       <span class="text-sm text-slate-500">
-        {{ passedCount }}/{{ year.courses.length }} courses passed ·
-        {{ earnedCredits }}/{{ totalCredits }} credits
+        {{ passedCount }}/{{ year.courses.length }} corsi superati ·
+        {{ earnedCredits }}/{{ totalCredits }} CFU
       </span>
     </div>
     <div class="flex items-center gap-3">
@@ -23,7 +23,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-50">
     <div *ngFor="let sem of [1, 2]" class="p-5">
       <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-        Semester {{ sem }}
+        Semestre {{ sem }}
       </p>
       <div class="space-y-2">
         <div *ngFor="let c of bySemester(sem)"
@@ -37,7 +37,7 @@
           </div>
           <!-- Credits + grade badge -->
           <div class="flex items-center gap-2 shrink-0">
-            <span class="text-xs text-slate-400">{{ c.credits }} cr</span>
+            <span class="text-xs text-slate-400">{{ c.credits }} CFU</span>
             <app-grade-badge *ngIf="c.passed && c.grade" [grade]="c.grade!" [lode]="!!c.lode">
             </app-grade-badge>
             <span *ngIf="!c.passed"

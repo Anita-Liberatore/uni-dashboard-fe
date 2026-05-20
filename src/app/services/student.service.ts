@@ -103,11 +103,11 @@ const MOCK_STUDY_PLAN: YearPlan[] = [
 ];
 
 const MOCK_DOCUMENTS: StudentDocument[] = [
-  { name: 'Enrollment Certificate',       type: 'PDF', size: '245 KB', date: 'Oct 15, 2023', status: 'Verified' },
-  { name: 'Study Plan 2023/24',           type: 'PDF', size: '128 KB', date: 'Sep 5, 2023',  status: 'Verified' },
-  { name: 'Identity Document',            type: 'JPG', size: '1.2 MB', date: 'Aug 20, 2023', status: 'Pending'  },
-  { name: 'English Certificate B2',       type: 'PDF', size: '340 KB', date: 'Jun 12, 2023', status: 'Verified' },
-  { name: 'Tuition Receipt A.Y. 2023/24', type: 'PDF', size: '89 KB',  date: 'Sep 30, 2023', status: 'Verified' },
+  { name: 'Certificato di iscrizione',   type: 'PDF', size: '245 KB', date: '15 ott 2023', status: 'Verified' },
+  { name: 'Piano di studi 2023/24',      type: 'PDF', size: '128 KB', date: '5 set 2023',  status: 'Verified' },
+  { name: "Documento d'identità",        type: 'JPG', size: '1.2 MB', date: '20 ago 2023', status: 'Pending'  },
+  { name: 'Certificato Inglese B2',      type: 'PDF', size: '340 KB', date: '12 giu 2023', status: 'Verified' },
+  { name: 'Ricevuta tasse A.A. 2023/24', type: 'PDF', size: '89 KB',  date: '30 set 2023', status: 'Verified' },
 ];
 
 const MOCK_CALENDAR: CalendarEvent[] = [

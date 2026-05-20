@@ -1,18 +1,18 @@
 <app-page-header
-  title="Calendar"
-  subtitle="Upcoming exams, deadlines and sessions">
+  title="Calendario"
+  subtitle="Prossimi esami, scadenze e sessioni">
 </app-page-header>
 
 <!-- Legend -->
 <div class="flex items-center gap-5 mb-6">
   <div class="flex items-center gap-2 text-xs text-slate-500">
-    <span class="w-2 h-2 rounded-full bg-indigo-500"></span> Exam
+    <span class="w-2 h-2 rounded-full bg-indigo-500"></span> Esame
   </div>
   <div class="flex items-center gap-2 text-xs text-slate-500">
-    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Deadline
+    <span class="w-2 h-2 rounded-full bg-amber-500"></span> Scadenza
   </div>
   <div class="flex items-center gap-2 text-xs text-slate-500">
-    <span class="w-2 h-2 rounded-full bg-sky-500"></span> Lecture
+    <span class="w-2 h-2 rounded-full bg-sky-500"></span> Lezione
   </div>
 </div>
 
@@ -38,16 +38,16 @@
       <p *ngIf="ev.room" class="text-xs text-slate-400 mt-0.5">{{ ev.room }}</p>
     </div>
 
-    <!-- Type badge -->
+    <!-- Type badge (Italian label) -->
     <span class="text-xs font-semibold px-2.5 py-1 rounded-full shrink-0"
           [ngClass]="typeClass(ev.type)">
-      {{ ev.type }}
+      {{ typeLabel(ev.type) }}
     </span>
 
-    <!-- Urgent indicator -->
+    <!-- Urgency indicator -->
     <span *ngIf="ev.urgent"
           class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full shrink-0">
-      Soon
+      Imminente
     </span>
   </div>
 </div>

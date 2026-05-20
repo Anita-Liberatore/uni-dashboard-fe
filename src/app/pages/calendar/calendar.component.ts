@@ -34,4 +34,9 @@ export class CalendarComponent {
       Lecture:  'bg-sky-500',
     }[type];
   }
+
+  /** Italian label for the event type badge */
+  typeLabel(type: CalendarEvent['type']): string {
+    return { Exam: 'Esame', Deadline: 'Scadenza', Lecture: 'Lezione' }[type];
+  }
 }

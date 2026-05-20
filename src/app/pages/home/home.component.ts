@@ -26,7 +26,7 @@ export class HomeComponent {
 
   private readonly svc = inject(StudentService);
 
-  readonly student  = toSignal(this.svc.getProfile(),       { requireSync: true });
+  readonly student   = toSignal(this.svc.getProfile(),       { requireSync: true });
   readonly academic = toSignal(this.svc.getAcademicRecord(), { requireSync: true });
   readonly upcoming = toSignal(this.svc.getExamsUpcoming(),  { requireSync: true });
 

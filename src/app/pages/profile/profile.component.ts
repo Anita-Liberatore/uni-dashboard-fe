@@ -60,8 +60,8 @@ export class ProfileComponent {
   uploadModalOpen = false;
 
   tabs: Tab[] = [
-    { key: 'info',      label: 'Personal info'   },
-    { key: 'academic',  label: 'Academic record' },
-    { key: 'documents', label: 'Documents'       },
+    { key: 'info',      label: 'Dati personali' },
+    { key: 'academic',  label: 'Carriera'        },
+    { key: 'documents', label: 'Documenti'       },
   ];
 }

@@ -20,7 +20,7 @@
           [ngClass]="doc.status === 'Verified'
             ? 'bg-emerald-50 text-emerald-700'
             : 'bg-amber-50 text-amber-700'">
-      {{ doc.status }}
+      {{ statusLabel(doc.status) }}
     </span>
     <button class="text-slate-300 hover:text-slate-500 transition" aria-label="Download">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">

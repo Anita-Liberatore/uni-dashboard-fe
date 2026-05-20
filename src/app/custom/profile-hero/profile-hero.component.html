@@ -14,11 +14,11 @@
           {{ student.name }} {{ student.surname }}
         </h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">
-          Enrolled
+          Iscritto/a
         </span>
       </div>
       <p class="text-sm text-slate-500 mt-0.5">
-        {{ student.area }} · Year {{ student.year }} · {{ student.studentId }}
+        {{ student.area }} · Anno {{ student.year }} · {{ student.studentId }}
       </p>
     </div>
 
@@ -26,17 +26,17 @@
     <div class="hidden md:flex items-center gap-6 shrink-0">
       <div class="text-center">
         <p class="text-xl font-bold text-slate-900">{{ academic.gpa }}</p>
-        <p class="text-xs text-slate-400">Avg grade</p>
+        <p class="text-xs text-slate-400">Media</p>
       </div>
       <div class="w-px h-8 bg-slate-100"></div>
       <div class="text-center">
         <p class="text-xl font-bold text-slate-900">{{ academic.credits.current }}</p>
-        <p class="text-xs text-slate-400">Credits</p>
+        <p class="text-xs text-slate-400">CFU</p>
       </div>
       <div class="w-px h-8 bg-slate-100"></div>
       <div class="text-center">
         <p class="text-xl font-bold text-slate-900">{{ academic.courses.current }}</p>
-        <p class="text-xs text-slate-400">Exams</p>
+        <p class="text-xs text-slate-400">Esami</p>
       </div>
     </div>
 

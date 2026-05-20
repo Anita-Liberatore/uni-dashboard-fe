@@ -14,12 +14,12 @@ interface PendingFile {
 }
 
 const DOC_TYPES = [
-  'Enrollment Certificate',
-  'Study Plan',
-  'Identity Document',
-  'Language Certificate',
-  'Tuition Receipt',
-  'Other',
+  'Certificato di iscrizione',
+  'Piano di studi',
+  "Documento d'identità",
+  'Certificato linguistico',
+  'Ricevuta tasse',
+  'Altro',
 ];
 
 @Component({

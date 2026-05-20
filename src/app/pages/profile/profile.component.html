@@ -1,6 +1,6 @@
 <app-page-header
-  title="Student profile"
-  subtitle="Personal data, academic record and documents">
+  title="Profilo studente"
+  subtitle="Dati personali, carriera accademica e documenti">
 </app-page-header>
 
 <!-- Hero card -->
@@ -10,46 +10,46 @@
 <app-pill-tabs [tabs]="tabs" [activeTab]="activeTab" (tabChange)="activeTab = $event">
 </app-pill-tabs>
 
-<!-- ── Tab: Personal info ── -->
-<app-section-card *ngIf="activeTab === 'info'" title="Personal data">
+<!-- ── Tab: Dati personali ── -->
+<app-section-card *ngIf="activeTab === 'info'" title="Dati personali">
   <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-50">
 
     <div class="p-6 space-y-5">
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Full name</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Nome e cognome</p>
         <p class="text-sm font-medium text-slate-800">{{ student().name }} {{ student().surname }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Date of birth</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Data di nascita</p>
         <p class="text-sm font-medium text-slate-800">
           {{ student().birthDate | formatBirthDate }} · {{ student().birthPlace }}
         </p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tax code</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Codice fiscale</p>
         <p class="text-sm font-mono font-medium text-slate-800">{{ student().taxCode }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Address</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Indirizzo</p>
         <p class="text-sm font-medium text-slate-800">{{ student().address }}</p>
       </div>
     </div>
 
     <div class="p-6 space-y-5">
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">University email</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Email universitaria</p>
         <p class="text-sm font-medium text-slate-800">{{ student().email }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Certified email (PEC)</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Email certificata (PEC)</p>
         <p class="text-sm font-medium text-slate-800">{{ student().pec }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Phone</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Telefono</p>
         <p class="text-sm font-medium text-slate-800">{{ student().phone }}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Student ID</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Matricola</p>
         <p class="text-sm font-mono font-medium text-slate-800">{{ student().studentId }}</p>
       </div>
     </div>
@@ -57,53 +57,53 @@
   </div>
 </app-section-card>
 
-<!-- ── Tab: Academic record ── -->
+<!-- ── Tab: Carriera ── -->
 <div *ngIf="activeTab === 'academic'" class="space-y-4">
 
-  <app-section-card title="Programme details">
+  <app-section-card title="Dettagli corso">
     <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-50">
       <div class="p-6 space-y-4">
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Degree programme</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Corso di laurea</p>
           <p class="text-sm font-medium text-slate-800">{{ academic().program }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Degree type</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Tipo di laurea</p>
           <p class="text-sm font-medium text-slate-800">{{ academic().degree }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Faculty</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Facoltà</p>
           <p class="text-sm font-medium text-slate-800">{{ academic().faculty }}</p>
         </div>
       </div>
       <div class="p-6 space-y-4">
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Enrolled since</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Iscritto/a dal</p>
           <p class="text-sm font-medium text-slate-800">{{ student().enrolledSince }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Expected graduation</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Laurea prevista</p>
           <p class="text-sm font-medium text-slate-800">{{ student().graduationDate }}</p>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Academic advisor</p>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Relatore</p>
           <p class="text-sm font-medium text-slate-800">{{ student().advisor }}</p>
         </div>
       </div>
     </div>
   </app-section-card>
 
-  <app-section-card title="Requirements progress">
+  <app-section-card title="Avanzamento carriera">
     <div class="p-6 space-y-5">
-      <app-progress-item label="Credits earned"
+      <app-progress-item label="CFU acquisiti"
         [current]="academic().credits.current" [total]="academic().credits.total"
         barClass="bg-indigo-500">
       </app-progress-item>
-      <app-progress-item label="Exams passed"
+      <app-progress-item label="Esami superati"
         [current]="academic().courses.current" [total]="academic().courses.total"
         barClass="bg-sky-500">
       </app-progress-item>
-      <app-progress-item label="Elective courses"
+      <app-progress-item label="Corsi a scelta"
         [current]="academic().electives.current" [total]="academic().electives.total"
         barClass="bg-amber-400">
       </app-progress-item>
@@ -112,8 +112,8 @@
 
 </div>
 
-<!-- ── Tab: Documents ── -->
-<app-section-card *ngIf="activeTab === 'documents'" title="Uploaded documents">
+<!-- ── Tab: Documenti ── -->
+<app-section-card *ngIf="activeTab === 'documents'" title="Documenti caricati">
   <button slot-action
           (click)="uploadModalOpen = true"
           class="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-white
@@ -122,7 +122,7 @@
       <path stroke-linecap="round" stroke-linejoin="round"
         d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
     </svg>
-    Upload
+    Carica
   </button>
 
   <div class="divide-y divide-slate-50">
@@ -130,7 +130,7 @@
   </div>
 </app-section-card>
 
-<!-- Upload modal (rendered outside the tab so it survives tab switches) -->
+<!-- Upload modal -->
 <app-upload-modal
   [isOpen]="uploadModalOpen"
   (closed)="uploadModalOpen = false"

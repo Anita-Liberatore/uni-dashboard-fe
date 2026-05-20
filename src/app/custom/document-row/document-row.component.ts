@@ -10,4 +10,9 @@ import { StudentDocument } from '../../models/document.model';
 })
 export class DocumentRowComponent {
   @Input() doc!: StudentDocument;
+
+  /** Translate document status to Italian for display */
+  statusLabel(status: StudentDocument['status']): string {
+    return status === 'Verified' ? 'Verificato' : 'In attesa';
+  }
 }
